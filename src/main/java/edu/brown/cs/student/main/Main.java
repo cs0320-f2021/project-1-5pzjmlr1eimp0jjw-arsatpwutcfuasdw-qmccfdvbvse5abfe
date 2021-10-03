@@ -253,17 +253,17 @@ public final class Main {
    * @param file -- the address for a local json file
    * @return - a List of Users which are the elements of the json file
    */
-  public List<List<String>> Json_loader(File file) {
+  public List<String> Json_loader(File file) {
     String line;
-    List<List<String>> strArr = new ArrayList<List<String>>();
+    List<String> strArr = new ArrayList<String>();
     try {
 
       BufferedReader fileR = new BufferedReader(new FileReader(file));
       while ((line = fileR.readLine()) != null) {  //abstract out only the relevant parts of the input
         line = line.trim();
-        Gson gson = new Gson();
-        List<String> jsonLine = gson.fromJson(line, List.class);
-          strArr.add(jsonLine);
+//        Gson gson = new Gson();
+//        List<String> jsonLine = gson.fromJson(line, List.class);
+          strArr.add(line);
         }
       }
 
