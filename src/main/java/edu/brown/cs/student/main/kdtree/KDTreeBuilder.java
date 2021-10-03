@@ -4,13 +4,11 @@ import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 /**
- * this class is responsible for building out the KD tree from a collection of collection of numbers
+ * this class is responsible for building out the KD tree from a Collection of List of numbers
  */
 public class KDTreeBuilder {
   Collection<List<Number>> dataset;
@@ -26,14 +24,13 @@ public class KDTreeBuilder {
 
   //list of nodes to turn into KD tree
 
-
   /**
-   *   converts each piece of data into a node with leaves as branches and depth 0
+   *   converts each piece of data into a node with leaves as branches and depth 1
    */
   public List<Node> convertData() {
     List<Node> nodeSet = new ArrayList<>();
     for(List<Number> d : this.dataset) {
-      Node n = new Node(d, null, null, 0);
+      Node n = new Node(d, null, null, 1);
       nodeSet.add(n);
     }
     return nodeSet;
@@ -95,8 +92,6 @@ public class KDTreeBuilder {
       parentNode.rightBranch = rightNode;
       return parentNode;
     }
-
-
 }
 
 
