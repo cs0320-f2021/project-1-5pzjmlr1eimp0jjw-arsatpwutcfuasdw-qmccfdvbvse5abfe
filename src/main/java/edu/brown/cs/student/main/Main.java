@@ -3,7 +3,6 @@ package edu.brown.cs.student.main;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
@@ -21,7 +20,10 @@ import edu.brown.cs.student.main.repl.REPL;
 import edu.brown.cs.student.main.repl.TriggerAction;
 import edu.brown.cs.student.main.triggerActions.MathBotAdd;
 import edu.brown.cs.student.main.triggerActions.MathBotSub;
-import edu.brown.cs.student.main.triggerActions.star;
+import edu.brown.cs.student.main.triggerActions.stars.HashMapSort;
+import edu.brown.cs.student.main.triggerActions.stars.csvReader;
+import edu.brown.cs.student.main.triggerActions.stars.naiveNeighbors;
+import edu.brown.cs.student.main.triggerActions.stars.star;
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -41,7 +43,7 @@ public final class Main {
   // use port 4567 by default when running server
   private static final int DEFAULT_PORT = 4567;
 
-  public static final List<TriggerAction> tas = Arrays.asList(new MathBotAdd(), new MathBotSub());
+  public static final List<TriggerAction> tas = Arrays.asList(new MathBotAdd(), new MathBotSub(), new csvReader(), new naiveNeighbors());
 
 
   /**
@@ -249,31 +251,31 @@ public final class Main {
   }
   /**file reading is done here
    * @return ArrayList that contains the stars in data*/
-  public List<star> stars(File file) {
-
-    String line;
-    List<star> strArr = new ArrayList<star>();
-    try {
-
-      BufferedReader fileR = new BufferedReader(new FileReader(file));
-      int counter = 0;
-      while ((line = fileR.readLine()) != null) {  //abstract out only the relevant parts of the input
-        line = line.trim();
-        String[] strs = line.split(",");
-
-        if (counter >= 1) { //skipping first line as it does not contain any star info
-          star newStar = new star(Integer.parseInt(strs[0]), strs[1], Double.parseDouble(strs[2]),
-              Double.parseDouble(strs[3]), Double.parseDouble(strs[4]));  //create a new instance of star. Passing in as well all the coordinates info
-          strArr.add(newStar);
-        }
-        counter++;
-      }
-
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    } return strArr;
-  }
+//  public List<star> stars(File file) {
+//
+//    String line;
+//    List<star> strArr = new ArrayList<star>();
+//    try {
+//
+//      BufferedReader fileR = new BufferedReader(new FileReader(file));
+//      int counter = 0;
+//      while ((line = fileR.readLine()) != null) {  //abstract out only the relevant parts of the input
+//        line = line.trim();
+//        String[] strs = line.split(",");
+//
+//        if (counter >= 1) { //skipping first line as it does not contain any star info
+//          star newStar = new star(Integer.parseInt(strs[0]), strs[1], Double.parseDouble(strs[2]),
+//              Double.parseDouble(strs[3]), Double.parseDouble(strs[4]));  //create a new instance of star. Passing in as well all the coordinates info
+//          strArr.add(newStar);
+//        }
+//        counter++;
+//      }
+//
+//
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    } return strArr;
+//  }
 
   /**
    * file reading for api
@@ -299,69 +301,69 @@ public final class Main {
   }
 
   /**naive_neighbors method is here*/
-  public void naive_neighbors(List<star> strArrList, String[] arguments){
-
-      int index;
-      HashMap<star, Double> result = new HashMap<>();
-
-      if(Integer.parseInt(arguments[1]) == 0){  //find zero star -> terminate
-        return;
-      }
-
-      if(arguments.length == 3){  //Pattern 1: naive_neighbors <k> <"name">
-
-        String removedQuotes;
-        removedQuotes = this.removeQuotes(arguments[2]); //remove quotes from the star name passed in
-        arguments[2] = removedQuotes;
-        index = this.findIndex(arguments[2], strArrList);
-
-        if(!this.exceptionHandling(strArrList, arguments[2])){  //if the star is not in the data read previously
-          return;
-        } else if (strArrList.size() == 1){    //if the starting star is the only star in the data
-          return;
-        }
-
-        for(star s: strArrList){
-          double temp;
-          temp = this.findDis(strArrList.get(index), s);  //find the distance of each star from the starting star
-          result.put(s, temp);  //put it in a list
-          s.setDis(temp); //let star remember its distance
-
-        }
-
-      } else if(arguments.length == 5){ //Pattern 2: naive_neighbors <k> <x> <y> <z>
-
-        for(star s: strArrList){
-          double temp2;
-          temp2 = this.approxDis(s, Double.parseDouble(arguments[2]), Double.parseDouble(arguments[3]), Double.parseDouble(arguments[4]));
-          result.put(s, temp2);
-          s.setDis(temp2);
-
-        }
-
-      } else {
-          System.out.println("Invalid Input: Please follow the format");  //not conforming to the two formats!
-          return;
-        }
-
-      HashMapSort HMS = new HashMapSort(result);
-      Iterator<Map.Entry<star, Double>> hmIterator = HMS.hashSort(); //here the sorted iterator is returned from HashMapSort class!
-
-      int i = 0;
-
-      while((hmIterator.hasNext()) && (i < Integer.parseInt(arguments[1]))){
-        star curStar = hmIterator.next().getKey();
-        if(arguments.length == 3) {
-          if (!curStar.getName().equals(arguments[2])){ //do not print out the starting star!
-            System.out.println(curStar.getID());
-            i++;
-          }
-        } else {
-          System.out.println(curStar.getID());
-          i++;
-        }
-      }
-    }
+//  public void naive_neighbors(List<star> strArrList, String[] arguments){
+//
+//      int index;
+//      HashMap<star, Double> result = new HashMap<>();
+//
+//      if(Integer.parseInt(arguments[1]) == 0){  //find zero star -> terminate
+//        return;
+//      }
+//
+////      if(arguments.length == 3){  //Pattern 1: naive_neighbors <k> <"name">
+////
+////        String removedQuotes;
+////        removedQuotes = this.removeQuotes(arguments[2]); //remove quotes from the star name passed in
+////        arguments[2] = removedQuotes;
+////        index = this.findIndex(arguments[2], strArrList);
+////
+////        if(!this.exceptionHandling(strArrList, arguments[2])){  //if the star is not in the data read previously
+////          return;
+////        } else if (strArrList.size() == 1){    //if the starting star is the only star in the data
+////          return;
+////        }
+////
+////        for(star s: strArrList){
+////          double temp;
+////          temp = this.findDis(strArrList.get(index), s);  //find the distance of each star from the starting star
+////          result.put(s, temp);  //put it in a list
+////          s.setDis(temp); //let star remember its distance
+////
+////        }
+//
+//      } else if(arguments.length == 5){ //Pattern 2: naive_neighbors <k> <x> <y> <z>
+//
+//        for(star s: strArrList){
+//          double temp2;
+//          temp2 = this.approxDis(s, Double.parseDouble(arguments[2]), Double.parseDouble(arguments[3]), Double.parseDouble(arguments[4]));
+//          result.put(s, temp2);
+//          s.setDis(temp2);
+//
+//        }
+//
+//      } else {
+//          System.out.println("Invalid Input: Please follow the format");  //not conforming to the two formats!
+//          return;
+//        }
+//
+//      HashMapSort HMS = new HashMapSort(result);
+//      Iterator<Map.Entry<star, Double>> hmIterator = HMS.hashSort(); //here the sorted iterator is returned from HashMapSort class!
+//
+//      int i = 0;
+//
+//      while((hmIterator.hasNext()) && (i < Integer.parseInt(arguments[1]))){
+//        star curStar = hmIterator.next().getKey();
+//        if(arguments.length == 3) {
+//          if (!curStar.getName().equals(arguments[2])){ //do not print out the starting star!
+//            System.out.println(curStar.getID());
+//            i++;
+//          }
+//        } else {
+//          System.out.println(curStar.getID());
+//          i++;
+//        }
+//      }
+//    }
 
   /**distance calculating equation for 5 inputs*/
   public double approxDis(star s1, Double x, Double y, Double z){

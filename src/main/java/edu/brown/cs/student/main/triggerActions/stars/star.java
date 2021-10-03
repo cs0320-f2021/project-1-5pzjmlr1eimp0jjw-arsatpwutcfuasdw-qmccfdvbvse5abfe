@@ -1,4 +1,4 @@
-package edu.brown.cs.student.main.triggerActions;
+package edu.brown.cs.student.main.triggerActions.stars;
 
 public class star{
 

@@ -1,7 +1,7 @@
-package edu.brown.cs.student.main;
+package edu.brown.cs.student.main.triggerActions.stars;
 
 
-import edu.brown.cs.student.main.triggerActions.star;
+import edu.brown.cs.student.main.triggerActions.stars.star;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -25,9 +25,8 @@ public class HashMapSort {
   }
 
   public Iterator<Map.Entry<star, Double>> hashSort(){
-    for(Map.Entry<star, Double> en: _myMap.entrySet()){
-      _myArrList.add(en); //transfer elements
-    }
+    //transfer elements
+    _myArrList.addAll(_myMap.entrySet());
     Comparator<Map.Entry<star, Double>> doubleComp = new Comparator<Map.Entry<star, Double>>(){
       @Override
       public int compare(Map.Entry<star, Double> ele1, Map.Entry<star, Double> ele2){
@@ -37,8 +36,7 @@ public class HashMapSort {
       }
     };
 
-    Collections.sort(_myArrList, doubleComp);   //sort
-    Iterator hmIterator = _myArrList.iterator();
-    return hmIterator;
+    _myArrList.sort(doubleComp);   //sort
+    return _myArrList.iterator();
   }
 }

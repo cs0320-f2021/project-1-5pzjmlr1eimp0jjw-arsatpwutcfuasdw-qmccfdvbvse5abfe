@@ -24,6 +24,7 @@ public class REPL {
         } catch (IllegalArgumentException e) {
           System.err.println(e.getMessage());
         } catch (Exception e){
+          e.printStackTrace();
           System.err.println("Error: Unknown cause of error");
         }
       }
