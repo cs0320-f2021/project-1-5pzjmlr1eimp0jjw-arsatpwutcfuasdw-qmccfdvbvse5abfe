@@ -90,6 +90,7 @@ public class API {
                 //need to deserialize request
                 System.out.println(request);
                 gson.fromJson(String.valueOf(request), Set.class);
+                System.out.println(request);
             }
 
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
