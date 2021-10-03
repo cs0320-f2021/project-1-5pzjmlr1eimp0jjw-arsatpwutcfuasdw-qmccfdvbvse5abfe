@@ -11,17 +11,18 @@ import java.lang.reflect.Array;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
+
+import static java.lang.Math.log;
+import static java.lang.Math.pow;
 
 public class API {
     private static int _max_iter;
     private static List<String> _baseurls;
     private int _num_entries;
     double _max_time;
-    Set<String> _data; // what type of Json, need to research more?
+    Set<String> _data = new HashSet<String>();
 
         /**
          * Constructs an API, allows user to specify desired priortization of accuracy, iterations, or time
@@ -93,10 +94,17 @@ public class API {
                 ApiClient client = new ApiClient();
                 HttpResponse<String> response = client.makeRequest(request);
                 System.out.println("Status " + response.statusCode());
-//                System.out.println("the body of the url is: " + response.body());
-                System.out.println(response.getClass());
-                Set url_responses = gson.fromJson(response.body(), Set.class);
-                System.out.println(url_responses.getClass());
+                if(response.statusCode()/((int)(pow(10,(int)log(response.statusCode())))) == 4){
+                    //checks to see if status code starts with a 4
+                    //code taken from https://stackoverflow.com/questions/2967898/retrieving-the-first-digit-of-a-number/2968068
+                    System.out.println("response class " + response.getClass());
+                    Set<String> url_responses = gson.fromJson(response.body(), Set.class);
+                    System.out.println("gson modified class "+url_responses.getClass());
+                    url_responses.addAll(get_data());
+                    set_data(url_responses);
+                }
+
+                System.out.println("the current data is: " + _data);
 
             }
 
@@ -114,6 +122,7 @@ public class API {
     public int get_num_entries(){return _num_entries;}
     public static int get_max_iter(){return _max_iter;}
     public double get_max_time(){return _max_time;}
+    public Set<String> get_data(){return _data;}
     public void set_data(Set<String> response_gson) {_data = response_gson;}
 
     }
