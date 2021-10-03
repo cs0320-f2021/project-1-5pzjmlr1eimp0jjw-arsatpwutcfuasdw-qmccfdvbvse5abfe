@@ -74,7 +74,7 @@ public final class Main {
     if (options.has("gui")) {
       runSparkServer((int) options.valueOf("port"));
     }
-<<<<<<< HEAD
+
     REPL.run(tas);
 //    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
 //      String input;
@@ -119,64 +119,64 @@ public final class Main {
 //      System.out.println("ERROR: Invalid input for REPL");
 //    }
 //
-=======
 
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-      String input;
-      double ans = 0.0;
-      while ((input = br.readLine()) != null) {
+//
+//    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+//      String input;
+//      double ans = 0.0;
+//      while ((input = br.readLine()) != null) {
+//
+//        try {
+//          input = input.trim();
+//          String[] arguments = input.split(" ");
+//
+//          if(arguments[0].equals("add")){
+//            double n1 = Double.parseDouble(arguments[1]) ;
+//            double n2 = Double.parseDouble(arguments[2]);
+//            ans = _mb.add(n1, n2);
+//            System.out.println(ans);
+//          }
+//          else if (arguments[0].equals("subtract")){
+//            double n1 = Double.parseDouble(arguments[1]);
+//            double n2 = Double.parseDouble(arguments[2]);
+//            ans = _mb.subtract(n1, n2);
+//            System.out.println(ans);
+//          }
+//          else if (arguments[0].equals("stars")){
+//            File file = new File(arguments[1]);
+//            _curData = this.stars(file);
+//            System.out.println("Read " +  _curData.size() + " stars from " + file);
+//          }
+//          else if ((_curData != null) && (arguments[0].equals("naive_neighbors"))){ //file must be read first
+//            this.naive_neighbors(_curData, arguments);
+//          }
+//          else if (arguments[0].equals("api")){
+//            System.out.println("In API");
+//            File file = new File(arguments[1]);
+//            _curData = this.api_urls(file);
+//            //now _curData is an array list of strings with each entry being a URL
+//            //now we need to make a new api object
+////            if (arguments.length == 5){
+////              API curr_api = new API(_curData, arguments[2], arguments[3], arguments[4]);
+////            }
+//            API curr_api = new API(_curData);
+//            curr_api.getIntroGetRequest();
+//          }
+//          else {
+//            System.out.println("ERROR: Invalid Command1");
+//          }
+//
+//        } catch (Exception e) {
+//          // e.printStackTrace();
+//          System.out.println("ERROR: We couldn't process your input");
+//        }
+//      }
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//      System.out.println("ERROR: Invalid input for REPL");
+//    }
 
-        try {
-          input = input.trim();
-          String[] arguments = input.split(" ");
 
-          if(arguments[0].equals("add")){
-            double n1 = Double.parseDouble(arguments[1]) ;
-            double n2 = Double.parseDouble(arguments[2]);
-            ans = _mb.add(n1, n2);
-            System.out.println(ans);
-          }
-          else if (arguments[0].equals("subtract")){
-            double n1 = Double.parseDouble(arguments[1]);
-            double n2 = Double.parseDouble(arguments[2]);
-            ans = _mb.subtract(n1, n2);
-            System.out.println(ans);
-          }
-          else if (arguments[0].equals("stars")){
-            File file = new File(arguments[1]);
-            _curData = this.stars(file);
-            System.out.println("Read " +  _curData.size() + " stars from " + file);
-          }
-          else if ((_curData != null) && (arguments[0].equals("naive_neighbors"))){ //file must be read first
-            this.naive_neighbors(_curData, arguments);
-          }
-          else if (arguments[0].equals("api")){
-            System.out.println("In API");
-            File file = new File(arguments[1]);
-            _curData = this.api_urls(file);
-            //now _curData is an array list of strings with each entry being a URL
-            //now we need to make a new api object
-//            if (arguments.length == 5){
-//              API curr_api = new API(_curData, arguments[2], arguments[3], arguments[4]);
-//            }
-            API curr_api = new API(_curData);
-            curr_api.getIntroGetRequest();
-          }
-          else {
-            System.out.println("ERROR: Invalid Command1");
-          }
-
-        } catch (Exception e) {
-          // e.printStackTrace();
-          System.out.println("ERROR: We couldn't process your input");
-        }
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("ERROR: Invalid input for REPL");
-    }
-
->>>>>>> 0e393993f186dcbd04c4f182a67d7cc691fa364e
   }
 
   private static FreeMarkerEngine createEngine() {
