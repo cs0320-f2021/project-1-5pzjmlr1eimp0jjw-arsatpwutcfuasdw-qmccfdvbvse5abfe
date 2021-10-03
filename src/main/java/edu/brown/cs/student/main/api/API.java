@@ -1,4 +1,4 @@
-package edu.brown.cs.student.main;
+package edu.brown.cs.student.main.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.net.URI;
 import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -88,9 +89,11 @@ public class API {
                         .uri(URI.create(reqUri))
                         .build();
                 //need to deserialize request
-                System.out.println(request);
-                gson.fromJson(String.valueOf(request), Set.class);
-                System.out.println(request);
+                ApiClient client = new ApiClient();
+                HttpResponse<String> response = client.makeRequest(request);
+                System.out.println(response.body());
+                gson.fromJson(response.body(), Set.class);
+                System.out.println(response.body());
             }
 
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
