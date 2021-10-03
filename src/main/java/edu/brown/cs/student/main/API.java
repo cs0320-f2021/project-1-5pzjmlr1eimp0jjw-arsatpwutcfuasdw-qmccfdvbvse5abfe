@@ -73,7 +73,6 @@ public class API {
                 System.out.println("ERROR: Invalid input for REPL");
             }
         }
-<<<<<<< HEAD
         public HttpRequest getIntroGetRequest() {
             //get all urls
             List<String> url_list = get_url();
@@ -96,12 +95,6 @@ public class API {
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
             // https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html
         return null;
-=======
-        public JsonObject api_call(){
-            //take code from api lab
-            //probably need to include api specific codes as an inout later on
-            return null;
->>>>>>> 43eaed75f5e39a66bbc9755856be5f2a6df67e7b
         }
 
 
