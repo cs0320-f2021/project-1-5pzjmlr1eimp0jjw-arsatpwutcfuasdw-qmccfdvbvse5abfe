@@ -43,8 +43,9 @@ public final class Main {
   // use port 4567 by default when running server
   private static final int DEFAULT_PORT = 4567;
 
-  public static final List<TriggerAction> tas = Arrays.asList(new MathBotAdd(), new MathBotSub(), new csvReader(), new naiveNeighbors());
-
+  public static final List<TriggerAction> tas =
+      Arrays.asList(new MathBotAdd(), new MathBotSub(), new csvReader(), new naiveNeighbors());
+//instantiate all the classes that implement the TriggerAction interface
 
   /**
    * The initial method called when execution begins.
@@ -77,7 +78,7 @@ public final class Main {
       runSparkServer((int) options.valueOf("port"));
     }
 
-    REPL.run(tas);
+    REPL.run(tas); //start up the REPL here
 
 
   }

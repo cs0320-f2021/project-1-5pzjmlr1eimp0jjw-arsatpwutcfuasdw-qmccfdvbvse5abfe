@@ -13,8 +13,8 @@ public class TriggerActionSetUp {
    * @param tas List of actions corresponding to commands that can be executed*/
   public TriggerActionSetUp(List<TriggerAction> tas) {
     actions =  new HashMap<>();
-    for (TriggerAction ta : tas) {
-      actions.put(ta.command(), ta);
+    for (TriggerAction ta : tas) {  //create a map that associates each class that implements TriggerAction
+      actions.put(ta.command(), ta); //key: command , value : class that implements the interface (e.g. "add" -> MathBotAdd)
     }
   }
 
@@ -26,12 +26,13 @@ public class TriggerActionSetUp {
   public String executeTriggerAction(String command, String[] args)
     throws IllegalArgumentException{
       String result = "";
-      TriggerAction corAction = actions.get(command);
+      TriggerAction corAction = actions.get(command); //return the class that corresponds to the input command
 
      if(corAction != null){
        boolean invalidArgument = true;
-       for (int possibleParameters : corAction.getNumPara()){
-         if (args.length == possibleParameters)  //needed args = input args
+       for (int possibleParameters : corAction.getNumPara()){ //loop through valid input choice
+         //corAction here can be one of the classes that implement the interface
+         if (args.length == possibleParameters)  //input args = needed args
          invalidArgument = false;
          result = corAction.execute(args);  //execute the corresponding execute()
        } if(invalidArgument){
