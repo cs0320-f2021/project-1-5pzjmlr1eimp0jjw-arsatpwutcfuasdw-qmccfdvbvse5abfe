@@ -92,9 +92,10 @@ public class API {
                 //need to deserialize request
                 ApiClient client = new ApiClient();
                 HttpResponse<String> response = client.makeRequest(request);
+                System.out.println("Status " + response.statusCode());
                 System.out.println("the body of the url is: " + response.body());
-                gson.fromJson(response.body(), Set.class);
-                System.out.println(response.body());
+                Set url_responses = gson.fromJson(response.body(), Set.class);
+                System.out.println(url_responses.getClass());
             }
 
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
