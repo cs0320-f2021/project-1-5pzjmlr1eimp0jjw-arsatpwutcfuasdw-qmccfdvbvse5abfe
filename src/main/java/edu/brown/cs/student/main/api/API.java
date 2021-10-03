@@ -21,7 +21,7 @@ public class API {
     private static List<String> _baseurls;
     private int _num_entries;
     double _max_time;
-    private Set<String> _data; // what type of Json, need to research more?
+    Set<String> _data; // what type of Json, need to research more?
 
         /**
          * Constructs an API, allows user to specify desired priortization of accuracy, iterations, or time
@@ -93,9 +93,11 @@ public class API {
                 ApiClient client = new ApiClient();
                 HttpResponse<String> response = client.makeRequest(request);
                 System.out.println("Status " + response.statusCode());
-                System.out.println("the body of the url is: " + response.body());
+//                System.out.println("the body of the url is: " + response.body());
+                System.out.println(response.getClass());
                 Set url_responses = gson.fromJson(response.body(), Set.class);
                 System.out.println(url_responses.getClass());
+
             }
 
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
@@ -108,10 +110,11 @@ public class API {
 
 
 
-        public static List<String> get_url(){return _baseurls;}
-        public int get_num_entries(){return _num_entries;}
-        public static int get_max_iter(){return _max_iter;}
-        public double get_max_time(){return _max_time;}
+    public static List<String> get_url(){return _baseurls;}
+    public int get_num_entries(){return _num_entries;}
+    public static int get_max_iter(){return _max_iter;}
+    public double get_max_time(){return _max_time;}
+    public void set_data(Set<String> response_gson) {_data = response_gson;}
 
     }
 
