@@ -6,17 +6,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Map;
+import java.util.*;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.lang.*;
-import java.util.HashMap;
-import java.util.Iterator;
 
 import com.google.common.collect.ImmutableMap;
 
+import com.google.gson.Gson;
 import edu.brown.cs.student.main.api.API;
+import edu.brown.cs.student.main.kdtree.User;
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -100,7 +98,7 @@ public final class Main {
             this.naive_neighbors(_curData, arguments);
           }
           else if (arguments[0].equals("api")){
-            System.out.println("In API");
+//            System.out.println("In API");
             File file = new File(arguments[1]);
             _curData = this.api_urls(file);
             //now _curData is an array list of strings with each entry being a URL
@@ -110,6 +108,10 @@ public final class Main {
 //            }
             API curr_api = new API(_curData);
             curr_api.getIntroGetRequest();
+          }
+          else if (arguments[0].equals("json")){
+            File file = new File(arguments[1]);
+            _curData = this.Json_loader(file);
           }
           else {
             System.out.println("ERROR: Invalid Command1");
@@ -245,6 +247,32 @@ public final class Main {
       e.printStackTrace();
     } return strArr;
   }
+
+  /**
+   * loads a local json file
+   * @param file -- the address for a local json file
+   * @return - a List of Users which are the elements of the json file
+   */
+  public List<List<String>> Json_loader(File file) {
+    String line;
+    List<List<String>> strArr = new ArrayList<List<String>>();
+    try {
+
+      BufferedReader fileR = new BufferedReader(new FileReader(file));
+      while ((line = fileR.readLine()) != null) {  //abstract out only the relevant parts of the input
+        line = line.trim();
+        Gson gson = new Gson();
+        List<String> jsonLine = gson.fromJson(line, List.class);
+          strArr.add(jsonLine);
+        }
+      }
+
+
+       catch (Exception e) {
+        e.printStackTrace();
+      } return strArr;
+  }
+
 
   /**naive_neighbors method is here*/
   public void naive_neighbors(List<star> strArrList, String[] arguments){

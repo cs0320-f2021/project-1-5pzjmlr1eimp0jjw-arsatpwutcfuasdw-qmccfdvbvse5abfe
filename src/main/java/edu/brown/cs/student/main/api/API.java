@@ -44,37 +44,10 @@ public class API {
          */
         public API(List<String> base_url) {
             _baseurls = base_url;
-            _max_iter = base_url.size() % 2; // these numbers will change as testing happens
+            _max_iter = 10; // these numbers will change as testing happens
             _max_time = 20;
         }
 
-        /**
-         *
-         */
-        public void load_data(){
-            //steps we want to first get a list of each specific url we can use
-            //grab max_iter randomly from list
-            //go through these and ping each (probably outsource pinging to seperate api_call method)
-            //take what they have and update data accordingly with any new information
-            //stop pinging if max time occurs (potentially stop pining a website if that specific one over does the individual site time
-            //when either all have been iterated through, or time has been reached
-
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-                String input;
-                double ans = 0.0;
-                while ((input = br.readLine()) != null) {
-                    try {
-                        input = input.trim();
-                    } catch (Exception e) {
-                        // e.printStackTrace();
-                        System.out.println("ERROR: We couldn't process your input");
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("ERROR: Invalid input for REPL");
-            }
-        }
         public HttpRequest getIntroGetRequest() {
             //get all urls
             List<String> url_list = get_url();
@@ -95,8 +68,7 @@ public class API {
                 HttpResponse<String> response = client.makeRequest(request);
                 System.out.println("Status " + response.statusCode());
                 if(199 < response.statusCode() && response.statusCode() < 300){
-                    //checks to see if status code starts with a 4
-                    //code taken from https://stackoverflow.com/questions/2967898/retrieving-the-first-digit-of-a-number/2968068
+                    //checks to see if status code starts with a 2
                     System.out.println("response class " + response.getClass());
                     Set<String> url_responses = gson.fromJson(response.body(), Set.class);
                     System.out.println("gson modified class "+url_responses.getClass());
