@@ -94,7 +94,7 @@ public class API {
                 ApiClient client = new ApiClient();
                 HttpResponse<String> response = client.makeRequest(request);
                 System.out.println("Status " + response.statusCode());
-                if(399 < response.statusCode() && response.statusCode() < 500){
+                if(199 < response.statusCode() && response.statusCode() < 300){
                     //checks to see if status code starts with a 4
                     //code taken from https://stackoverflow.com/questions/2967898/retrieving-the-first-digit-of-a-number/2968068
                     System.out.println("response class " + response.getClass());
