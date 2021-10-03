@@ -6,17 +6,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.*;
-import java.util.*;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import com.google.common.collect.ImmutableMap;
 
+import edu.brown.cs.student.main.repl.REPL;
+import edu.brown.cs.student.main.repl.TriggerAction;
+import edu.brown.cs.student.main.triggerActions.MathBotAdd;
+import edu.brown.cs.student.main.triggerActions.MathBotSub;
+import edu.brown.cs.student.main.triggerActions.star;
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -27,7 +32,6 @@ import spark.Response;
 import spark.Spark;
 import spark.TemplateViewRoute;
 import spark.template.freemarker.FreeMarkerEngine;
-import java.util.LinkedHashMap;
 
 /**
  * The Main class of our project. This is where execution begins.
@@ -36,8 +40,9 @@ public final class Main {
 
   // use port 4567 by default when running server
   private static final int DEFAULT_PORT = 4567;
-  private MathBot _mb;
-  private List _curData;
+
+  public static final List<TriggerAction> tas = Arrays.asList(new MathBotAdd(), new MathBotSub());
+
 
   /**
    * The initial method called when execution begins.
@@ -52,7 +57,6 @@ public final class Main {
 
   private Main(String[] args) {
     this.args = args;
-    _mb = new MathBot();
   }
 
   private void run() {
@@ -70,50 +74,50 @@ public final class Main {
     if (options.has("gui")) {
       runSparkServer((int) options.valueOf("port"));
     }
-
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-      String input;
-      double ans = 0.0;
-      while ((input = br.readLine()) != null) {
-
-        try {
-          input = input.trim();
-          String[] arguments = input.split(" ");
-
-          if(arguments[0].equals("add")){
-            double n1 = Double.parseDouble(arguments[1]);
-            double n2 = Double.parseDouble(arguments[2]);
-            ans = _mb.add(n1, n2);
-            System.out.println(ans);
-          }
-          else if (arguments[0].equals("subtract")){
-            double n1 = Double.parseDouble(arguments[1]);
-            double n2 = Double.parseDouble(arguments[2]);
-            ans = _mb.subtract(n1, n2);
-            System.out.println(ans);
-          }
-          else if (arguments[0].equals("stars")){
-            File file = new File(arguments[1]);
-            _curData = this.stars(file);
-            System.out.println("Read " +  _curData.size() + " stars from " + file);
-          }
-          else if ((_curData != null) && (arguments[0].equals("naive_neighbors"))){ //file must be read first
-            this.naive_neighbors(_curData, arguments);
-          }
-          else {
-            System.out.println("ERROR: Invalid Command");
-          }
-
-        } catch (Exception e) {
-          // e.printStackTrace();
-          System.out.println("ERROR: We couldn't process your input");
-        }
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("ERROR: Invalid input for REPL");
-    }
-
+    REPL.run(tas);
+//    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+//      String input;
+//      double ans = 0.0;
+//      while ((input = br.readLine()) != null) {
+//
+//        try {
+//          input = input.trim();
+//          String[] arguments = input.split(" ");
+//
+//          if(arguments[0].equals("add")){
+//            double n1 = Double.parseDouble(arguments[1]);
+//            double n2 = Double.parseDouble(arguments[2]);
+//            ans = _mb.add(n1, n2);
+//            System.out.println(ans);
+//          }
+//          else if (arguments[0].equals("subtract")){
+//            double n1 = Double.parseDouble(arguments[1]);
+//            double n2 = Double.parseDouble(arguments[2]);
+//            ans = _mb.subtract(n1, n2);
+//            System.out.println(ans);
+//          }
+//          else if (arguments[0].equals("stars")){
+//            File file = new File(arguments[1]);
+//            _curData = this.stars(file);
+//            System.out.println("Read " +  _curData.size() + " stars from " + file);
+//          }
+//          else if ((_curData != null) && (arguments[0].equals("naive_neighbors"))){ //file must be read first
+//            this.naive_neighbors(_curData, arguments);
+//          }
+//          else {
+//            System.out.println("ERROR: Invalid Command");
+//          }
+//
+//        } catch (Exception e) {
+//          // e.printStackTrace();
+//          System.out.println("ERROR: We couldn't process your input");
+//        }
+//      }
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//      System.out.println("ERROR: Invalid input for REPL");
+//    }
+//
   }
 
   private static FreeMarkerEngine createEngine() {

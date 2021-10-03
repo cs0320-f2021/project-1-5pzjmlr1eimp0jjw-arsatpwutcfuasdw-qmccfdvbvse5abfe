@@ -1,6 +1,8 @@
 package edu.brown.cs.student.main;
 
-public class MathBot {
+import edu.brown.cs.student.main.repl.TriggerAction;
+
+public class MathBot implements TriggerAction {
 
   /**
    * Default constructor.
@@ -31,4 +33,18 @@ public class MathBot {
     return num2 - num1;
   }
 
+  @Override
+  public String command() {
+    return "add";
+  }
+
+  @Override
+  public String execute(String[] args) {
+    return null;
+  }
+
+  @Override
+  public int[] getNumPara() {
+    return new int[0];
+  }
 }

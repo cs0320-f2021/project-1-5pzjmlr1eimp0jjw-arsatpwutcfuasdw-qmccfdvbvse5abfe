@@ -1,9 +1,10 @@
 package edu.brown.cs.student.main;
 
 
+import edu.brown.cs.student.main.triggerActions.star;
+
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.LinkedHashMap;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Comparator;
