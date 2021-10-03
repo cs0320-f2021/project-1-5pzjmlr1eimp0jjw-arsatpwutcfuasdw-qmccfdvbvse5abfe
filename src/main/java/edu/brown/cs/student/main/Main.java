@@ -100,6 +100,17 @@ public final class Main {
           else if ((_curData != null) && (arguments[0].equals("naive_neighbors"))){ //file must be read first
             this.naive_neighbors(_curData, arguments);
           }
+          else if (arguments[0].equals("api")){
+            File file = new File(arguments[1]);
+            _curData = this.api_urls(file);
+            //now _curData is an array list of strings with each entry being a URL
+            //now we need to make a new api object
+//            if (arguments.length == 5){
+//              API curr_api = new API(_curData, arguments[2], arguments[3], arguments[4]);
+//            }
+            API curr_api = new API(_curData);
+            curr_api.getIntroGetRequest();
+          }
           else {
             System.out.println("ERROR: Invalid Command");
           }
@@ -211,6 +222,30 @@ public final class Main {
       e.printStackTrace();
     } return strArr;
   }
+
+  /**
+   * file reading for api
+   * @param file list of base urls for api to search
+   * @return a list of strings that has one entry for each potential url
+   */
+  public List<String> api_urls(File file) {
+
+    String line;
+    List<String> strArr = new ArrayList<String>();
+    try {
+
+      BufferedReader fileR = new BufferedReader(new FileReader(file));
+      while ((line = fileR.readLine()) != null) {  //abstract out only the relevant parts of the input
+        line = line.trim();
+        strArr.add(line);
+      }
+
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    } return strArr;
+  }
+
   /**naive_neighbors method is here*/
   public void naive_neighbors(List<star> strArrList, String[] arguments){
 
