@@ -81,7 +81,7 @@ public final class Main {
           String[] arguments = input.split(" ");
 
           if(arguments[0].equals("add")){
-            double n1 = Double.parseDouble(arguments[2]) ;
+            double n1 = Double.parseDouble(arguments[1]) ;
             double n2 = Double.parseDouble(arguments[2]);
             ans = _mb.add(n1, n2);
             System.out.println(ans);
@@ -102,15 +102,15 @@ public final class Main {
           }
           else if (arguments[0].equals("api")){
             System.out.println("In API");
-//            File file = new File(arguments[1]);
-//            _curData = this.api_urls(file);
+            File file = new File(arguments[1]);
+            _curData = this.api_urls(file);
             //now _curData is an array list of strings with each entry being a URL
             //now we need to make a new api object
 //            if (arguments.length == 5){
 //              API curr_api = new API(_curData, arguments[2], arguments[3], arguments[4]);
 //            }
-//            API curr_api = new API(_curData);
-//            curr_api.getIntroGetRequest();
+            API curr_api = new API(_curData);
+            curr_api.getIntroGetRequest();
           }
           else {
             System.out.println("ERROR: Invalid Command");
