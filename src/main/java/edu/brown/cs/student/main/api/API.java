@@ -84,6 +84,7 @@ public class API {
 
             for (int i = 0; i < url_list.size() && i <= get_max_iter(); i++){
                 String curr_url = url_list.get(i);
+                System.out.println("Current url is " + curr_url);
                 String reqUri = curr_url + "?auth=hcunnin4&key=bi4w98vsP2";
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(reqUri))
@@ -91,7 +92,7 @@ public class API {
                 //need to deserialize request
                 ApiClient client = new ApiClient();
                 HttpResponse<String> response = client.makeRequest(request);
-                System.out.println(response.body());
+                System.out.println("the body of the url is: " + response.body());
                 gson.fromJson(response.body(), Set.class);
                 System.out.println(response.body());
             }
