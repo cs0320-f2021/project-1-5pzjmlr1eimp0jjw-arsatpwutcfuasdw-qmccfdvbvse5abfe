@@ -1,11 +1,10 @@
 package edu.brown.cs.student.main.kdtree;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 /**
- * this abstract class contains the nodes for our KD trees
+ * the nodes for a KD tree -- each KD tree is also a node
  */
 public class Node {
   List<Number> value; //the value of the node itself
@@ -44,9 +43,5 @@ public class Node {
 
   public Boolean hasRight() {
     return this.rightBranch != null;
-  }
-
-  public Node insert(Collection<Number> set) {
-    return null;
   }
 }
