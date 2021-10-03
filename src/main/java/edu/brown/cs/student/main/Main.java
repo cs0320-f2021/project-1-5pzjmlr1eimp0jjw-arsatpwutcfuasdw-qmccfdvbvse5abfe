@@ -113,7 +113,7 @@ public final class Main {
             curr_api.getIntroGetRequest();
           }
           else {
-            System.out.println("ERROR: Invalid Command");
+            System.out.println("ERROR: Invalid Command1");
           }
 
         } catch (Exception e) {
