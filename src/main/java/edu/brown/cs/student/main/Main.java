@@ -81,13 +81,12 @@ public final class Main {
           String[] arguments = input.split(" ");
 
           if(arguments[0].equals("add")){
-            double n1 = Double.parseDouble(arguments[1]) ;
+            double n1 = Double.parseDouble(arguments[2]) ;
             double n2 = Double.parseDouble(arguments[2]);
             ans = _mb.add(n1, n2);
             System.out.println(ans);
           }
-          else if (arguments[0].equals("subtract"
-          )){
+          else if (arguments[0].equals("subtract")){
             double n1 = Double.parseDouble(arguments[1]);
             double n2 = Double.parseDouble(arguments[2]);
             ans = _mb.subtract(n1, n2);
