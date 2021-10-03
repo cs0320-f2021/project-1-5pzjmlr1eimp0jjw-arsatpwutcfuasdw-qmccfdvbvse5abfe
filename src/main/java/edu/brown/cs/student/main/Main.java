@@ -260,6 +260,7 @@ public final class Main {
 
       BufferedReader fileR = new BufferedReader(new FileReader(file));
       while ((line = fileR.readLine()) != null) {  //abstract out only the relevant parts of the input
+        System.out.println(line);
         line = line.trim();
 //        Gson gson = new Gson();
 //        List<String> jsonLine = gson.fromJson(line, List.class);
@@ -271,7 +272,7 @@ public final class Main {
        catch (Exception e) {
         e.printStackTrace();
       }
-    System.out.println(strArr);
+//    System.out.println(strArr);
     return strArr;
   }
 
