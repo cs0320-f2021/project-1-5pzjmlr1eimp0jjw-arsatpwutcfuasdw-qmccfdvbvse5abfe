@@ -270,7 +270,9 @@ public final class Main {
 
        catch (Exception e) {
         e.printStackTrace();
-      } return strArr;
+      }
+    System.out.println(strArr);
+    return strArr;
   }
 
 
