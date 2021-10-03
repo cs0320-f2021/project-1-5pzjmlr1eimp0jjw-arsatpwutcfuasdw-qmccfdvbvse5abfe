@@ -12,15 +12,15 @@ public class REPL {
   public static void run(List<TriggerAction> tas) {
     try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
       String input;
-      while ((input = br.readLine()) != null) {
+      while ((input = br.readLine()) != null) { //while the REPL has input
         try {
           input = input.trim();
           String[] arguments = input.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-          String command = arguments[0];
-          String[] args = Arrays.copyOfRange(arguments, 1, arguments.length);
+          String command = arguments[0]; //retrieve the command (ex "stars", "add")
+          String[] args = Arrays.copyOfRange(arguments, 1, arguments.length); //copy the rest of arguments into different array
 
-          TriggerActionSetUp executor = new TriggerActionSetUp(tas);
-          System.out.println(executor.executeTriggerAction(command, args));
+          TriggerActionSetUp executor = new TriggerActionSetUp(tas); 
+          System.out.println(executor.executeTriggerAction(command, args)); //print out the results of the execute method
         } catch (IllegalArgumentException e) {
           System.err.println(e.getMessage());
         } catch (Exception e){
