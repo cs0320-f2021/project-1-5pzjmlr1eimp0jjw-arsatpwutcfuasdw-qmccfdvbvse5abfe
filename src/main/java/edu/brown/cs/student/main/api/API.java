@@ -83,7 +83,7 @@ public class API {
             //stop when max_iter has been reached or when all urls have been searched
             Gson gson = new Gson();
 
-            for (int i = 0; i < url_list.size() && i <= get_max_iter(); i++){
+            for (int i = 0; i <= url_list.size() && i <= get_max_iter(); i++){
                 String curr_url = url_list.get(i);
                 System.out.println("Current url is " + curr_url);
                 String reqUri = curr_url + "?auth=hcunnin4&key=bi4w98vsP2";
@@ -94,7 +94,7 @@ public class API {
                 ApiClient client = new ApiClient();
                 HttpResponse<String> response = client.makeRequest(request);
                 System.out.println("Status " + response.statusCode());
-                if(response.statusCode()/((int)(pow(10,(int)log(response.statusCode())))) == 4){
+                if(399 < response.statusCode() && response.statusCode() < 500){
                     //checks to see if status code starts with a 4
                     //code taken from https://stackoverflow.com/questions/2967898/retrieving-the-first-digit-of-a-number/2968068
                     System.out.println("response class " + response.getClass());
