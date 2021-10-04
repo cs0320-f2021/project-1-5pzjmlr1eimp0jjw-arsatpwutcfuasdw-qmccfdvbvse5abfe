@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class api_urls implements TriggerAction {
-  static ArrayList<String> _storedUrls;
-  public api_urls() {
-    _storedUrls = new ArrayList<>();
-  }
 
   //  static ArrayList<String> _storedStar;
 //  public api_urls() {
@@ -44,9 +40,10 @@ public class api_urls implements TriggerAction {
       }
       API curr_api = new API(strArr);
       curr_api.getIntroGetRequest();
-      _storedUrls = strArr;
-      System.out.println(_storedUrls.size());
-      ans = String.format("Read %d urls from %s", _storedUrls.size(), args[0]);
+//      _storedUrls = strArr;
+//      System.out.println(_storedUrls.size());
+//      ans = String.format("Read %d urls from %s", _storedUrls.size(), args[0]);
+      ans = String.format("Read %d urls from %s", strArr.size(), args[0]);
 
 
     } catch (Exception e) {
