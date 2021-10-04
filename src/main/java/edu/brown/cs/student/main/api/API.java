@@ -51,15 +51,22 @@ public class API {
             _max_time = _max_time.plusSeconds(20);
         }
 
-        public HttpRequest getIntroGetRequest() {
+        public void getIntroGetRequest() {
             //get all urls
             List<String> url_list = get_url();
             //randomize the url_list
             Collections.shuffle(url_list);
             //stop when max_iter has been reached or when all urls have been searched
             Gson gson = new Gson();
+            //create an empty list of 500 status code urls
+            List<String> check_again = new ArrayList<String>();
 
-            for (int i = 0; i <= url_list.size() && i <= get_max_iter() && !get_max_time().isNegative(); i++){
+            for (int i = 0;  i <= url_list.size() && i <= get_max_iter() && !get_max_time().isNegative(); i++){
+                //if we still have space and time, but have gone through the list
+//                if( i > url_list.size()){
+//                    url_list = check_again;
+//                    check_again = new ArrayList<String>();
+//                }
                 String curr_url = url_list.get(i);
                 System.out.println("Current url is " + curr_url);
                 String reqUri = curr_url + "?auth=hcunnin4&key=bi4w98vsP2";
@@ -83,6 +90,8 @@ public class API {
                     System.out.println("gson modified class "+url_responses.getClass());
                     url_responses.addAll(get_data());
                     set_data(url_responses);
+                } else if (499 < response.statusCode() && response.statusCode() < 600){
+                    check_again.add(curr_url);
                 }
 
 //                System.out.println("the current data is: " + _data);
@@ -92,7 +101,6 @@ public class API {
 
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
             // https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html
-        return null;
         }
 
 
