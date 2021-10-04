@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public class User {
-  int user_id;
-  Number weight;
+  public int user_id;
+  public Number weight;
   String bust_size;
-  Number height;
-  Number age;
+  public Number height;
+  public Number age;
   String body_type;
-  String horoscope;
+  public String horoscope;
 
   public User(int user_id, double weight, String bust_size, Number height, int age,
               String body_type, String horoscope) {
