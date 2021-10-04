@@ -78,6 +78,7 @@ public class API {
                 }
 
                 System.out.println("the current data is: " + _data);
+                System.out.println("the length of the data is: " + _data.size());
 
             }
 
