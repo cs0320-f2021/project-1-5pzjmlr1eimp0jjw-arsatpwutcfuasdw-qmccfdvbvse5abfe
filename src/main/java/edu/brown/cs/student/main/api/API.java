@@ -70,14 +70,14 @@ public class API {
                 System.out.println("Status " + response.statusCode());
                 if(199 < response.statusCode() && response.statusCode() < 300){
                     //checks to see if status code starts with a 2
-                    System.out.println("response class " + response.getClass());
+//                    System.out.println("response class " + response.getClass());
                     Set<String> url_responses = gson.fromJson(response.body(), Set.class);
-                    System.out.println("gson modified class "+url_responses.getClass());
+//                    System.out.println("gson modified class "+url_responses.getClass());
                     url_responses.addAll(get_data());
                     set_data(url_responses);
                 }
 
-                System.out.println("the current data is: " + _data);
+//                System.out.println("the current data is: " + _data);
                 System.out.println("the length of the data is: " + _data.size());
 
             }
