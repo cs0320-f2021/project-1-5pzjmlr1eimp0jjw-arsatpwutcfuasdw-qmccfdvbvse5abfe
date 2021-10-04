@@ -20,10 +20,7 @@ import edu.brown.cs.student.main.repl.REPL;
 import edu.brown.cs.student.main.repl.TriggerAction;
 import edu.brown.cs.student.main.triggerActions.MathBotAdd;
 import edu.brown.cs.student.main.triggerActions.MathBotSub;
-import edu.brown.cs.student.main.triggerActions.stars.HashMapSort;
-import edu.brown.cs.student.main.triggerActions.stars.csvReader;
-import edu.brown.cs.student.main.triggerActions.stars.naiveNeighbors;
-import edu.brown.cs.student.main.triggerActions.stars.star;
+import edu.brown.cs.student.main.triggerActions.stars.*;
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -44,12 +41,12 @@ public final class Main {
   private static final int DEFAULT_PORT = 4567;
 
   public static final List<TriggerAction> tas =
-      Arrays.asList(new MathBotAdd(), new MathBotSub(), new csvReader(), new naiveNeighbors());
+      Arrays.asList(new MathBotAdd(), new MathBotSub(), new csvReader(), new naiveNeighbors(), new api_urls());
 //instantiate all the classes that implement the TriggerAction interface
 
   /**
    * The initial method called when execution begins.
-   *
+   *m
    * @param args An array of command line arguments
    */
   public static void main(String[] args) {
