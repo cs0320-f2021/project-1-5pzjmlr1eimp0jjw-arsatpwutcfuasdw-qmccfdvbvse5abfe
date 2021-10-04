@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class api_urls implements TriggerAction {
-//  static ArrayList<String> _storedStar;
+  static ArrayList<String> _storedUrls;
+  public api_urls() {
+    _storedUrls = new ArrayList<>();
+  }
+
+  //  static ArrayList<String> _storedStar;
 //  public api_urls() {
 //    _storedStar = new ArrayList<>();
 //  }
@@ -20,7 +25,7 @@ public class api_urls implements TriggerAction {
 
   @Override
   public String execute(String[] args) {
-    File file = new File(args[1]);
+//    File file = new File(args[0]);
     String ans = "";
 
 
@@ -32,13 +37,16 @@ public class api_urls implements TriggerAction {
     ArrayList<String> strArr = new ArrayList<String>();
     String line;
     try {
-      BufferedReader fileR = new BufferedReader(new FileReader(file));
+      BufferedReader fileR = new BufferedReader(new FileReader(args[0]));
       while ((line = fileR.readLine()) != null) {  //abstract out only the relevant parts of the input
         line = line.trim();
         strArr.add(line);
       }
       API curr_api = new API(strArr);
       curr_api.getIntroGetRequest();
+      _storedUrls = strArr;
+      System.out.println(_storedUrls.size());
+      ans = String.format("Read %d urls from %s", _storedUrls.size(), args[0]);
 
 
     } catch (Exception e) {

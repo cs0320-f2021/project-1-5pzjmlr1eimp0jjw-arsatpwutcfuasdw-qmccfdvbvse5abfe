@@ -72,7 +72,7 @@ public class API {
                     //checks to see if status code starts with a 2
 //                    System.out.println("response class " + response.getClass());
                     Set<String> url_responses = gson.fromJson(response.body(), Set.class);
-//                    System.out.println("gson modified class "+url_responses.getClass());
+                    System.out.println("gson modified class "+url_responses.getClass());
                     url_responses.addAll(get_data());
                     set_data(url_responses);
                 }
