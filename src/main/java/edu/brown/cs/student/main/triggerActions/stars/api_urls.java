@@ -21,6 +21,7 @@ public class api_urls implements TriggerAction {
   @Override
   public String execute(String[] args) {
     File file = new File(args[1]);
+    String ans = "";
 
 
 //    curData = this.api_urls(file);
@@ -43,6 +44,8 @@ public class api_urls implements TriggerAction {
     } catch (Exception e) {
       e.printStackTrace();
     }
+    return ans;
+  }
 
 //    try {
 //
