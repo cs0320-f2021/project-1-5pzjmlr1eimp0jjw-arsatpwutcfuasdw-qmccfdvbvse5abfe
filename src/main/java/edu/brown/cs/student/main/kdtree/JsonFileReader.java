@@ -16,8 +16,8 @@ public class JsonFileReader {
         _fileAddress = fileAddy;
     }
 
-    public List<User> loadUsers() {
-        List<User> strArr = new ArrayList<User>();
+    public ArrayList<User> loadUsers() {
+        ArrayList<User> strArr = new ArrayList<User>();
         String line;
         int counter = 0;
         Gson gson = new Gson();

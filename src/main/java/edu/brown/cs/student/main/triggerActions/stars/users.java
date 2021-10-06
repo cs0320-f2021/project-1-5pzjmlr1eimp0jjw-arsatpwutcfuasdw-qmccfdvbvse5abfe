@@ -1,7 +1,7 @@
 package edu.brown.cs.student.main.triggerActions.stars;
 
-import com.google.gson.Gson;
 import edu.brown.cs.student.main.api.API;
+import edu.brown.cs.student.main.kdtree.JsonFileReader;
 import edu.brown.cs.student.main.kdtree.User;
 import edu.brown.cs.student.main.repl.TriggerAction;
 
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class users implements TriggerAction {
-  static ArrayList<User> _storedStar;
+  static ArrayList<User> _storedUsers;
   public users() {
-    _storedStar = new ArrayList<>();
+    _storedUsers = new ArrayList<>();
   }
   @Override
   public String command() {
@@ -37,7 +37,10 @@ public class users implements TriggerAction {
         call.getIntroGetRequest();
 
       } else {
-        File file = new File(args[0]);
+        System.out.print("finding document");
+        JsonFileReader reader = new JsonFileReader(args[0]);
+        ArrayList<User> users = reader.loadUsers();
+        _storedUsers = users;
 
 
       }
@@ -78,10 +81,11 @@ public class users implements TriggerAction {
     return new int[]{1};
   }
 
-  public static ArrayList<User> getCurStarData(){
-    System.out.println(_storedStar.size());
-    return _storedStar;
+  public static ArrayList<User> get_storedUsers(){
+    System.out.println(_storedUsers.size());
+    return _storedUsers;
   }
+
   /**
    * file reading for api
    * @param file list of base urls for api to search

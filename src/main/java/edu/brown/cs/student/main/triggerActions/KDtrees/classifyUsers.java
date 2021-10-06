@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static edu.brown.cs.student.main.triggerActions.stars.users.get_storedUsers;
+
 public class classifyUsers implements TriggerAction {
   int _fromID;
   int _fromInfo;
@@ -23,7 +25,7 @@ public class classifyUsers implements TriggerAction {
 
   @Override
   public String execute(String[] args) {
-    List<User> userList = new ArrayList<>();
+    List<User> userList = get_storedUsers();
     User dummyUser = new User(0, 0, "",0 ,0 , "", "");
     /*TODO: insert methods that will output a user list
      */
