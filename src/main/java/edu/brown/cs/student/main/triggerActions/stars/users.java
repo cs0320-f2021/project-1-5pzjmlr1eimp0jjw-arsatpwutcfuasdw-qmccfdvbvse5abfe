@@ -24,6 +24,7 @@ public class users implements TriggerAction {
   @Override
   public String execute(String[] args) {
     Boolean json = Boolean.FALSE;
+    System.out.println("executing...");
     try {
       if(args[0].equals("online")){
         System.out.println("in online");
