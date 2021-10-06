@@ -25,6 +25,7 @@ public class users implements TriggerAction {
   public String execute(String[] args) {
     Boolean json = Boolean.FALSE;
     System.out.println("executing...");
+
     try {
       if(args[0].equals("online")){
         System.out.println("in online");
@@ -37,7 +38,8 @@ public class users implements TriggerAction {
         call.getIntroGetRequest();
 
       } else {
-        File file = new File(args[0]);
+//        File file = new File(args[0]);
+        System.out.println("no file found");
         json = Boolean.TRUE;
 
       }
