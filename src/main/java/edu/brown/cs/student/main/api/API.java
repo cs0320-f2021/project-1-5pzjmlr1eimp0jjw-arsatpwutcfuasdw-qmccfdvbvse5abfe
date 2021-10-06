@@ -107,8 +107,8 @@ public class API {
             }
             Set<String> jsonString = get_data();
 //            Set<User> as_users = new HashSet<User>();
-            for (String i: jsonString){
-                System.out.println(i);
+            for (int i = 0; i < jsonString.size(); i++){
+                System.out.println(jsonString.toArray()[i]);
             }
 
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
