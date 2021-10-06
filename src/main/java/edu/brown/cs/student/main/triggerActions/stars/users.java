@@ -37,8 +37,8 @@ public class users implements TriggerAction {
         call.getIntroGetRequest();
 
       } else {
-//        File file = new File(args[0]);
-        System.out.println("no file found");
+        File file = new File(args[0]);
+
 
       }
 
