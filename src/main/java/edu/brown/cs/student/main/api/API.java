@@ -98,6 +98,7 @@ public class API {
                 System.out.println("the length of the data is: " + _data.size());
 
             }
+            get_data();
 
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
             // https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html

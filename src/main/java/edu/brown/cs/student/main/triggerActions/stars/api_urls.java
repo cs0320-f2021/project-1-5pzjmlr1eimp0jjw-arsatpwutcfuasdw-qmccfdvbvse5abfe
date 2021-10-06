@@ -16,7 +16,7 @@ public class api_urls implements TriggerAction {
 //  }
   @Override
   public String command() {
-    return "api";
+    return "users";
   }
 
   @Override
