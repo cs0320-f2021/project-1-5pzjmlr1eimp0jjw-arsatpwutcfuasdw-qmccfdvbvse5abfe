@@ -150,28 +150,8 @@ public final class Main {
   }
 
 
-  /**
-   * file reading for api
-   * @param file list of base urls for api to search
-   * @return a list of strings that has one entry for each potential url
-   */
-  public List<String> api_urls(File file) {
-
-    String line;
-    List<String> strArr = new ArrayList<String>();
-    try {
-
-      BufferedReader fileR = new BufferedReader(new FileReader(file));
-      while ((line = fileR.readLine()) != null) {  //abstract out only the relevant parts of the input
-        line = line.trim();
-        strArr.add(line);
-      }
 
 
-    } catch (Exception e) {
-      e.printStackTrace();
-    } return strArr;
-  }
 
 
 

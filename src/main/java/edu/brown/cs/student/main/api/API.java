@@ -2,6 +2,7 @@ package edu.brown.cs.student.main.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import edu.brown.cs.student.main.kdtree.User;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -33,12 +34,12 @@ public class API {
          * @param max_iter - maximum number of iterations
          * @param max_time - maximum time for api call (seconds)
          */
-        public API(List<String> base_url, int num_entries, int max_iter, Duration max_time){
-            _baseurls = base_url;
-            _num_entries = num_entries;
-            _max_iter = max_iter;
-            _max_time = max_time;
-        }
+//        public API(List<String> base_url, int num_entries, int max_iter, Duration max_time){
+//            _baseurls = base_url;
+//            _num_entries = num_entries;
+//            _max_iter = max_iter;
+//            _max_time = max_time;
+//        }
 
         /**
          * Constructs an API using the optimal accuracy, iterations, and max_time as found through testing
@@ -86,6 +87,7 @@ public class API {
                 if(199 < response.statusCode() && response.statusCode() < 300){
                     //checks to see if status code starts with a 2
 //                    System.out.println("response class " + response.getClass());
+
                     Set<String> url_responses = gson.fromJson(response.body(), Set.class);
                     System.out.println("gson modified class "+url_responses.getClass());
                     url_responses.addAll(get_data());
@@ -98,7 +100,11 @@ public class API {
                 System.out.println("the length of the data is: " + _data.size());
 
             }
-            get_data();
+            Set<String> jsonString = get_data();
+//            Set<User> as_users = new HashSet<User>();
+            for (String i: jsonString){
+                System.out.println(i);
+            }
 
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
             // https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html
