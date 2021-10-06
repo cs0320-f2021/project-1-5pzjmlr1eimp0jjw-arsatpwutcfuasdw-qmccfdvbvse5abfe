@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class users implements TriggerAction {
-  static ArrayList<star> _storedStar;
+  static ArrayList<User> _storedStar;
   public users() {
     _storedStar = new ArrayList<>();
   }
@@ -23,11 +23,10 @@ public class users implements TriggerAction {
 
   @Override
   public String execute(String[] args) {
-    Boolean json = Boolean.FALSE;
     System.out.println("executing...");
 
     try {
-      if(args[0].equals("online")){
+      if(args[0].trim().equals("online")){
         System.out.println("in online");
         File file = new File("data/urls/two-urls.csv");
         System.out.println("file made");
@@ -40,7 +39,6 @@ public class users implements TriggerAction {
       } else {
 //        File file = new File(args[0]);
         System.out.println("no file found");
-        json = Boolean.TRUE;
 
       }
 
@@ -80,7 +78,7 @@ public class users implements TriggerAction {
     return new int[]{1};
   }
 
-  public static ArrayList<star> getCurStarData(){
+  public static ArrayList<User> getCurStarData(){
     System.out.println(_storedStar.size());
     return _storedStar;
   }
