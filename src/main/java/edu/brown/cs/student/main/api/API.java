@@ -65,7 +65,7 @@ public class API {
             //create an empty list of 500 status code urls
             List<String> check_again = new ArrayList<String>();
 
-            for (int i = 0;  i <= url_list.size() && i <= get_max_iter() && !get_max_time().isNegative(); i++){
+            for (int i = 0;  i < url_list.size() && i <= get_max_iter() && !get_max_time().isNegative(); i++){
                 //if we still have space and time, but have gone through the list
                 String curr_url = url_list.get(i);
                 System.out.println("Current url is " + curr_url);
