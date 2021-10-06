@@ -26,9 +26,13 @@ public class users implements TriggerAction {
     Boolean json = Boolean.FALSE;
     try {
       if(args[0].equals("online")){
+        System.out.println("in online");
         File file = new File("data/urls/two-urls.csv");
+        System.out.println("file made");
         List<String> urlsList = api_urls(file);
+        System.out.println("list of urls to search made");
         API call = new API(urlsList);
+        System.out.println("api made");
         call.getIntroGetRequest();
 
       } else {
