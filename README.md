@@ -1,9 +1,6 @@
 # README
-To build use:
-`mvn package`
+###REPL
 
-To run use:
-`./run`
+###API
 
-To start the server use:
-`./run --gui [--port=<port>]`
+###KDtree
