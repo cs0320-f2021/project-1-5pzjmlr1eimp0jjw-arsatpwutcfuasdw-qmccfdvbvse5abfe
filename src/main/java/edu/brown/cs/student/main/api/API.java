@@ -2,6 +2,7 @@ package edu.brown.cs.student.main.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import edu.brown.cs.student.main.kdtree.User;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -33,12 +34,12 @@ public class API {
          * @param max_iter - maximum number of iterations
          * @param max_time - maximum time for api call (seconds)
          */
-        public API(List<String> base_url, int num_entries, int max_iter, Duration max_time){
-            _baseurls = base_url;
-            _num_entries = num_entries;
-            _max_iter = max_iter;
-            _max_time = max_time;
-        }
+//        public API(List<String> base_url, int num_entries, int max_iter, Duration max_time){
+//            _baseurls = base_url;
+//            _num_entries = num_entries;
+//            _max_iter = max_iter;
+//            _max_time = max_time;
+//        }
 
         /**
          * Constructs an API using the optimal accuracy, iterations, and max_time as found through testing
@@ -51,6 +52,9 @@ public class API {
             _max_time = _max_time.plusSeconds(20);
         }
 
+    /**
+     * sends out api requests to the given urls stored in _baseurls
+     */
         public void getIntroGetRequest() {
             //get all urls
             List<String> url_list = get_url();
@@ -61,12 +65,8 @@ public class API {
             //create an empty list of 500 status code urls
             List<String> check_again = new ArrayList<String>();
 
-            for (int i = 0;  i <= url_list.size() && i <= get_max_iter() && !get_max_time().isNegative(); i++){
+            for (int i = 0;  i < url_list.size() && i <= get_max_iter() && !get_max_time().isNegative(); i++){
                 //if we still have space and time, but have gone through the list
-//                if( i > url_list.size()){
-//                    url_list = check_again;
-//                    check_again = new ArrayList<String>();
-//                }
                 String curr_url = url_list.get(i);
                 System.out.println("Current url is " + curr_url);
                 String reqUri = curr_url + "?auth=hcunnin4&key=bi4w98vsP2";
@@ -76,20 +76,27 @@ public class API {
                 //need to deserialize request
 
                 ApiClient client = new ApiClient();
+                //gets the time before the call
                 Instant inst1 = Instant.now();
+                //makes the call
                 HttpResponse<String> response = client.makeRequest(request);
+                //gets the time after the call
                 Instant inst2 = Instant.now();
                 Duration time_run = Duration.between(inst1, inst2);
+                //updates time to reflect time left
                 set_time(get_max_time().minus(time_run));
                 System.out.println("Time remaining: " + get_max_time().toString());
                 System.out.println("Status " + response.statusCode());
                 if(199 < response.statusCode() && response.statusCode() < 300){
                     //checks to see if status code starts with a 2
 //                    System.out.println("response class " + response.getClass());
+                    //makes a set from the api calls
                     Set<String> url_responses = gson.fromJson(response.body(), Set.class);
                     System.out.println("gson modified class "+url_responses.getClass());
                     url_responses.addAll(get_data());
+                    //update data to have all the new pulls
                     set_data(url_responses);
+
                 } else if (499 < response.statusCode() && response.statusCode() < 600){
                     check_again.add(curr_url);
                 }
@@ -97,6 +104,11 @@ public class API {
 //                System.out.println("the current data is: " + _data);
                 System.out.println("the length of the data is: " + _data.size());
 
+            }
+            Set<String> jsonString = get_data();
+//            Set<User> as_users = new HashSet<User>();
+            for (int i = 0; i < jsonString.size(); i++){
+                System.out.println(jsonString.toArray()[i]);
             }
 
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and

@@ -30,7 +30,7 @@ public class naiveNeighbors implements TriggerAction {
   public String execute(String[] args) {
 
     int index;
-    ArrayList<star> curStarData = csvReader.getCurStarData();
+    ArrayList<star> curStarData = stars.getCurStarData();
 
     HashMap<star, Double> result = new HashMap<>();
 

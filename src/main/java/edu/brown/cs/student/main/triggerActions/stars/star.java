@@ -38,3 +38,4 @@ public class star{
     return _dis;
   }
 }
+
