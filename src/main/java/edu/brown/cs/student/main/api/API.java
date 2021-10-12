@@ -55,7 +55,7 @@ public class API {
     /**
      * sends out api requests to the given urls stored in _baseurls
      */
-        public void getIntroGetRequest() {
+        public ArrayList<User> getIntroGetRequest() {
             //get all urls
             List<String> url_list = get_url();
             //randomize the url_list
@@ -106,10 +106,18 @@ public class API {
 
             }
             Set<String> jsonString = get_data();
+            ArrayList<User> distinctUsers = new ArrayList<User>();
 //            Set<User> as_users = new HashSet<User>();
             for (int i = 0; i < jsonString.size(); i++){
-                System.out.println(jsonString.toArray()[i]);
+//                System.out.println(jsonString.toArray()[i]);
+                String curr_json = gson.toJson(jsonString.toArray()[i]);
+                User curr_user = gson.fromJson(curr_json, User.class);
+                distinctUsers.add(curr_user);
             }
+//            System.out.println(distinctUsers.toString());
+            System.out.println("the length of users is: " + distinctUsers.size());
+
+            return distinctUsers;
 
             // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
             // https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html

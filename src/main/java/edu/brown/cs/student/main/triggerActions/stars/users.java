@@ -34,7 +34,7 @@ public class users implements TriggerAction {
         System.out.println("list of urls to search made");
         API call = new API(urlsList);
         System.out.println("api made");
-        call.getIntroGetRequest();
+        _storedUsers = call.getIntroGetRequest();
 
       } else {
         System.out.print("finding document");
@@ -73,7 +73,7 @@ public class users implements TriggerAction {
 //
     } catch (Exception e) {
       e.printStackTrace();
-    } return "ans";
+    } return _storedUsers.toString();
   }
 
   @Override

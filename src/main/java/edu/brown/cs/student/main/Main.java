@@ -16,8 +16,11 @@ import java.util.Iterator;
 
 import com.google.common.collect.ImmutableMap;
 
+import edu.brown.cs.student.main.api.API;
 import edu.brown.cs.student.main.repl.REPL;
 import edu.brown.cs.student.main.repl.TriggerAction;
+import edu.brown.cs.student.main.triggerActions.KDtrees.classifyUsers;
+import edu.brown.cs.student.main.triggerActions.KDtrees.similarUsers;
 import edu.brown.cs.student.main.triggerActions.MathBotAdd;
 import edu.brown.cs.student.main.triggerActions.MathBotSub;
 import edu.brown.cs.student.main.triggerActions.stars.*;
@@ -41,7 +44,8 @@ public final class Main {
   private static final int DEFAULT_PORT = 4567;
 
   public static final List<TriggerAction> tas =
-    Arrays.asList(new MathBotAdd(), new MathBotSub(), new stars(), new naiveNeighbors(), new api_urls());
+    Arrays.asList(new MathBotAdd(), new MathBotSub(), new stars(), new naiveNeighbors(), new users(),
+            new similarUsers(), new classifyUsers());
 //instantiate all the classes that implement the TriggerAction interface
 
   /**

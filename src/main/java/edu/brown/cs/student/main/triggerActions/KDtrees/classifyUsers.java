@@ -26,6 +26,7 @@ public class classifyUsers implements TriggerAction {
   @Override
   public String execute(String[] args) {
     List<User> userList = get_storedUsers();
+//    System.out.println("size of users " + userList.size());
     User dummyUser = new User(0, 0, "",0 ,0 , "", "");
     /*TODO: insert methods that will output a user list
      */
