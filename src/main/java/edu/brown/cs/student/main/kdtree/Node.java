@@ -25,9 +25,7 @@ public class Node {
   }
 
   //returns the left branch
-  public Node getLeftBranch() {
-    return this.leftBranch;
-  }
+  public Node getLeftBranch() {return this.leftBranch;}
 
   public Node getRightBranch() {
     return this.rightBranch;
