@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import edu.brown.cs.student.main.kdtree.Rent;
+import edu.brown.cs.student.main.kdtree.Review;
 import edu.brown.cs.student.main.kdtree.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -91,7 +93,10 @@ public class API {
                         String line = "";
                         line = response.body();
                         ObjectMapper mapper = new ObjectMapper();
-                        User[] myObjects = mapper.readValue(line, User[].class);
+                        Map<String, User[]> mapUser = this.createUserMapping(mapper, line, false);
+                        Map<String, Rent[]> mapRent = this.createRentMapping(mapper, line, false);
+                        Map<String, Review[]> mapReview = this.createUserapping(mapper, line, false);
+                        
                         ArrayList<User> temp = new ArrayList<>(Arrays.asList(myObjects));
                         // ArrayList<User> loopTemp = temp;
                         for(User usr : myObjects){
@@ -133,10 +138,25 @@ public class API {
             return true;
     }
 
-//    public boolean compFields(List<User> L1, List<User> L2){
-//            if(L1.get(0).user_id != null && L2.g)
-//    }
+    public Map<String, User[]> createUserMapping(ObjectMapper obm, String line, boolean called)
+        throws JsonProcessingException {
+        Map<String, User[]> map = new HashMap<>();
+        map.put("User", obm.readValue(line, User[].class));
+        return map;
+    }
 
+    public Map<String, Rent[]> createRentMapping(ObjectMapper obm, String line, boolean called)
+        throws JsonProcessingException {
+        Map<String, Rent[]> map = new HashMap<>();
+        map.put("Rent", obm.readValue(line, Rent[].class));
+        return map;
+    }
+    public Map<String, Review[]> createReviewMapping(ObjectMapper obm, String line, boolean called)
+        throws JsonProcessingException {
+        Map<String, Review[]> map = new HashMap<>();
+        map.put("Rent", obm.readValue(line, Review[].class));
+        return map;
+    }
 
 
     public static List<String> get_url(){return _baseurls;}
