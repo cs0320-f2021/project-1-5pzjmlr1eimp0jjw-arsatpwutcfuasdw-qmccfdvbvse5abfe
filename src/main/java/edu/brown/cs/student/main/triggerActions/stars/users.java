@@ -1,5 +1,6 @@
 package edu.brown.cs.student.main.triggerActions.stars;
 
+import com.google.gson.Gson;
 import edu.brown.cs.student.main.api.API;
 import edu.brown.cs.student.main.kdtree.JsonFileReader;
 import edu.brown.cs.student.main.kdtree.User;
@@ -23,7 +24,7 @@ public class users implements TriggerAction {
 
   @Override
   public String execute(String[] args) {
-    System.out.println("executing...");
+    System.out.println("executing now...");
 
     try {
       if(args[0].trim().equals("online")){
@@ -37,12 +38,40 @@ public class users implements TriggerAction {
         _storedUsers = call.getIntroGetRequest();
 
       } else {
-        System.out.print("finding document");
-        JsonFileReader reader = new JsonFileReader(args[0]);
-        ArrayList<User> users = reader.loadUsers();
-        _storedUsers = users;
-
-
+        Gson gson = new Gson();
+        System.out.println("finding document");
+        File file = new File(args[0]);
+        List<String> jsonLines = api_urls(file);
+        int counter = 0;
+        String toBeJson = "";
+        ArrayList<User> allUsers = new ArrayList<User>();
+        for (String currLine : jsonLines){
+          if(counter == 0) {
+            System.out.println("First line");
+            toBeJson = currLine.substring(1, currLine.length() - 1);
+          } else {
+            System.out.println("remaining lines");
+            toBeJson = currLine.substring(0, currLine.length() - 1);
+          }
+          System.out.println(toBeJson);
+          String currJson = gson.toJson(toBeJson);
+          System.out.println("currJson " + currJson);
+          allUsers.add(gson.fromJson(currJson, User.class));
+          System.out.println("size " + allUsers.size());
+          counter ++;
+//
+//          String[] splitString = currLine.split("\\[");
+//          if(splitString.length > 1){
+//            System.out.println(splitString);
+//          } else {
+//            for (String i: splitString){
+//              System.out.println(i);
+//            }
+        }
+//        JsonFileReader reader = new JsonFileReader(args[0]);
+//        ArrayList<User> users = reader.loadUsers();
+//        _storedUsers = users;
+        _storedUsers = allUsers;
       }
 
       //if we are api

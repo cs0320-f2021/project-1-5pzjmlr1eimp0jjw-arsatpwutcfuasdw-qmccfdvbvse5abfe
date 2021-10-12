@@ -68,7 +68,7 @@ public class API {
             for (int i = 0;  i < url_list.size() && i <= get_max_iter() && !get_max_time().isNegative(); i++){
                 //if we still have space and time, but have gone through the list
                 String curr_url = url_list.get(i);
-                System.out.println("Current url is " + curr_url);
+//                System.out.println("Current url is " + curr_url);
                 String reqUri = curr_url + "?auth=hcunnin4&key=bi4w98vsP2";
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(reqUri))
@@ -85,14 +85,14 @@ public class API {
                 Duration time_run = Duration.between(inst1, inst2);
                 //updates time to reflect time left
                 set_time(get_max_time().minus(time_run));
-                System.out.println("Time remaining: " + get_max_time().toString());
-                System.out.println("Status " + response.statusCode());
+//                System.out.println("Time remaining: " + get_max_time().toString());
+//                System.out.println("Status " + response.statusCode());
                 if(199 < response.statusCode() && response.statusCode() < 300){
                     //checks to see if status code starts with a 2
 //                    System.out.println("response class " + response.getClass());
                     //makes a set from the api calls
                     Set<String> url_responses = gson.fromJson(response.body(), Set.class);
-                    System.out.println("gson modified class "+url_responses.getClass());
+//                    System.out.println("gson modified class "+url_responses.getClass());
                     url_responses.addAll(get_data());
                     //update data to have all the new pulls
                     set_data(url_responses);
@@ -102,7 +102,7 @@ public class API {
                 }
 
 //                System.out.println("the current data is: " + _data);
-                System.out.println("the length of the data is: " + _data.size());
+//                System.out.println("the length of the data is: " + _data.size());
 
             }
             Set<String> jsonString = get_data();
@@ -115,7 +115,7 @@ public class API {
                 distinctUsers.add(curr_user);
             }
 //            System.out.println(distinctUsers.toString());
-            System.out.println("the length of users is: " + distinctUsers.size());
+//            System.out.println("the length of users is: " + distinctUsers.size());
 
             return distinctUsers;
 
