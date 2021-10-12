@@ -87,7 +87,7 @@ public class naiveNeighbors implements TriggerAction {
         i++;
       }
     }
-
+    System.out.println("END");
     return null;
   }
 

@@ -30,6 +30,13 @@
       <version>6.0-alpha-3</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.4</version>
+    </dependency>
+
     <!--
         junit is a testing framework.
         http://junit.org/junit4/.
@@ -107,6 +114,7 @@
       <version>2.7.1</version>
     </dependency>
 
+
     <!--
         SQLite dependency for databases.
         https://bitbucket.org/xerial/sqlite-jdbc.
@@ -116,7 +124,14 @@
       <artifactId>sqlite-jdbc</artifactId>
       <version>3.30.1</version>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.12.3</version>
+    </dependency>
+
   </dependencies>
+
 
   <!-- Build section -->
   <build>

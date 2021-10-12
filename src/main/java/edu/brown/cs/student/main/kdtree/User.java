@@ -1,20 +1,25 @@
 package edu.brown.cs.student.main.kdtree;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 public class User {
-  public int user_id;
-  public Number weight;
-  String bust_size;
-  public Number height;
-  public Number age;
-  String body_type;
+  public String user_id;     //all fields have to be of type String because of type mismatch when loading from json
+  public String weight;
+  public String bust_size;
+  public String height;
+  public String age;
+  public String body_type;
   public String horoscope;
 
-  public User(int user_id, double weight, String bust_size, Number height, int age,
+
+  public User(){
+    super();
+  }
+  public User(String user_id, String weight, String bust_size, String height, String age,
               String body_type, String horoscope) {
     this.user_id = user_id;
     this.weight = weight;
@@ -23,8 +28,30 @@ public class User {
     this.age = age;
     this.body_type = body_type;
     this.horoscope = horoscope;
-  }
 
+
+  }
+    @Override
+    public int hashCode() {
+      return Integer.parseInt(this.user_id);  //using the id as a hashcode
+    }
+
+    @Override
+    public boolean equals(Object other){   //compare based off User's hashcode
+      if(this == other){
+        return true;
+      }
+
+      if(!(other instanceof User)){
+        return false;
+      }
+
+      User otherUser = (User) other;
+      if(this.hashCode() == otherUser.hashCode()){
+        return true;
+      }
+      return false;
+    }
   /**
    *
    * @param userList - users to build KD tree from
@@ -35,9 +62,12 @@ public class User {
     List<List<Number>> userInfo = new ArrayList<>();
     for (User person : userList) {
       List<Number> userData = new ArrayList<>();
-      userData.set(0, person.weight);
-      userData.set(1, person.height);
-      userData.set(2, person.age);
+      Double we2 = Double.parseDouble(person.height.replaceAll("[^0-9]", ""));
+      Double age = Double.parseDouble(person.age.replaceAll("[^0-9]", ""));
+      Double we = Double.parseDouble(person.weight.replaceAll("[^0-9]", ""));
+      userData.set(0, we);
+      userData.set(1, we2);
+      userData.set(2, age);
       userInfo.add(userData);
     }
     NodeComparator comparator = new NodeComparator();
@@ -78,9 +108,13 @@ public class User {
     List <Integer> idList = new ArrayList<>();
     for (List<Number> elt : neighbors) {
       for (User user : usersToSearch) {
-        if ((elt.get(0).equals(user.weight)) && (elt.get(1).equals(user.height)) && (elt.get(2)
-            .equals(user.age))) {
-          idList.add(user.user_id);
+        int i = Integer.parseInt(user.user_id);
+        Double age = Double.parseDouble(user.age.replaceAll("[^0-9]", "")); //get rid of lbs
+        Double weight = Double.parseDouble(user.weight.replaceAll("[^0-9]", ""));
+        Double height = Double.parseDouble(user.height.replaceAll("[^0-9]", ""));
+        if ((elt.get(0).equals(weight)) && (elt.get(1).equals(height)) && (elt.get(2)
+            .equals(age))) {
+          idList.add(i);
         }
       }
     }
@@ -130,7 +164,8 @@ public class User {
     //parses through IDs of closest users, gets their horoscopes, and adds 1 value of horoscope in hashmap
     for (int n : closestUsers) {
       for (User u : userList) {
-        if (u.user_id == n) {
+        int i = Integer.parseInt(u.user_id);
+        if (i == n) {
          String horoscope = u.horoscope;
          horoscopeChart.put(horoscope, horoscopeChart.get(horoscope) + 1); //adds 1 to horoscope value
         }

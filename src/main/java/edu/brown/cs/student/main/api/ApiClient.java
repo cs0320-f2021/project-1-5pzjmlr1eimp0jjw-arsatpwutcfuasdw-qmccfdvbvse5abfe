@@ -1,9 +1,12 @@
 package edu.brown.cs.student.main.api;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Paths;
 import java.time.Duration;
 
 /**
@@ -23,6 +26,7 @@ public class ApiClient {
     public HttpResponse<String> makeRequest(HttpRequest req) {
 
         try {
+
             HttpResponse<String> apiResponse = client.send(req, HttpResponse.BodyHandlers.ofString());
 //            System.out.println("Status " + apiResponse.statusCode());
 //            System.out.println(apiResponse.body());

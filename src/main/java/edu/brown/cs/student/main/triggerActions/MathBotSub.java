@@ -15,12 +15,13 @@ public class MathBotSub implements TriggerAction {
       double n1 = Double.parseDouble(args[0]);
       double n2 = Double.parseDouble(args[1]);
       ans = String.format("%f", n2 - n1);
+      System.out.println("results of Subtraction: " + ans);
     } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
     } catch (Exception e) {
       System.err.println("ERROR: Unknown Error encountered");
     }
-    return ans;
+    return null;
   }
 
   @Override

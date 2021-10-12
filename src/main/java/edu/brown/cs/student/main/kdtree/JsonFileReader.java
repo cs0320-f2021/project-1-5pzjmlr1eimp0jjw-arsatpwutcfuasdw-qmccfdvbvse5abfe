@@ -1,13 +1,13 @@
 package edu.brown.cs.student.main.kdtree;
 
 import com.google.gson.Gson;
-import edu.brown.cs.student.main.api.API;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.GsonBuilder;
+
 
 public class JsonFileReader {
     private String _fileAddress;
@@ -20,24 +20,27 @@ public class JsonFileReader {
         ArrayList<User> strArr = new ArrayList<User>();
         String line;
         int counter = 0;
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+            .setLenient()
+            .create();
+
         try {
             BufferedReader fileR = new BufferedReader(new FileReader(_fileAddress));
             while ((line = fileR.readLine()) != null) {  //abstract out only the relevant parts of the input
                 line = line.trim();
-                if (counter == 0) {
-                    line = line.substring(0);
-                } else if (line.split("/]").length == 2) {
-                    line = line.split("/]")[1];
+                line = line.replaceAll("\\[", "");  //remove the square brackets
+                line = line.replaceAll("]", "");
+                line = line.substring(0, line.length() - 1);
+                if(line.charAt(line.length() - 1) != '}'){  //last json object will not have comma so add back the bracket that you deleted
+                    line = line.concat("}");
                 }
+
                 User currUser = gson.fromJson(line, User.class);
                 counter++;
                 strArr.add(currUser);
             }
-            return strArr;
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    return new ArrayList<User>();
+        } return strArr;
     }
 }
