@@ -88,7 +88,7 @@ public class KDTreeBuilder {
       parentNode.leftBranch = leftNode;
 
       if (rightNodes.isEmpty()) { rightNode = null; }
-      else { rightNode = this.buildTree(comparator, leftNodes, depth+1); }
+      else { rightNode = this.buildTree(comparator, rightNodes, depth+1); }
       parentNode.rightBranch = rightNode;
       return parentNode;
     }
