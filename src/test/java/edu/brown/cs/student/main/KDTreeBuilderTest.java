@@ -36,6 +36,7 @@ public class KDTreeBuilderTest {
     dataset1.add(set1);
     dataset1.add(set2);
     dataset1.add(set3);
+
     NodeComparator<Node> comparator= new NodeComparator<Node>();
     KDTreeBuilder kdTree1 = new KDTreeBuilder(dataset1, comparator, 3);
     List<Node> nodeSet1 = kdTree1.convertData();
