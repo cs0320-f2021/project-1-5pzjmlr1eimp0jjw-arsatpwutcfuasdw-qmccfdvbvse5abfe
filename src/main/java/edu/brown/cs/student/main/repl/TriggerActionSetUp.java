@@ -30,19 +30,22 @@ public class TriggerActionSetUp {
 
      if(corAction != null){
        boolean invalidArgument = true;
-       for (int possibleParameters : corAction.getNumPara()){ //loop through valid input choice
+       for (int i = 0; i < corAction.getNumPara().length; i++) { //loop through valid input choice
          //corAction here can be one of the classes that implement the interface
-         if (args.length == possibleParameters)  //input args = needed args
-         invalidArgument = false;
-         result = corAction.execute(args);  //execute the corresponding execute()
-       } if(invalidArgument){
+         if (args.length == corAction.getNumPara()[i]) { //input args = needed args
+           invalidArgument = false;
+           corAction.execute(args);  //execute the corresponding execute()
+         }
+       }
+
+       if(invalidArgument){
          throw new IllegalArgumentException("ERROR: Invalid number of Arguments"); //not enough args
        }
      } else {
        throw new IllegalArgumentException("ERROR: Command not understood"); //no corresponding execute function
      }
 
-     return result;
+     return null;
   }
 }
 

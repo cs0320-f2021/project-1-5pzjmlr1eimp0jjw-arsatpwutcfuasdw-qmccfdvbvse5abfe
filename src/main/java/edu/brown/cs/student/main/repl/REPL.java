@@ -20,7 +20,7 @@ public class REPL {
           String[] args = Arrays.copyOfRange(arguments, 1, arguments.length); //copy the rest of arguments into different array
 
           TriggerActionSetUp executor = new TriggerActionSetUp(tas); 
-          System.out.println(executor.executeTriggerAction(command, args)); //print out the results of the execute method
+          executor.executeTriggerAction(command, args); //print out the results of the execute method
         } catch (IllegalArgumentException e) {
           System.err.println(e.getMessage());
         } catch (Exception e){

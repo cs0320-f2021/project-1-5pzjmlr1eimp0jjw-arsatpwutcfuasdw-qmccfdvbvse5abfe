@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package edu.brown.cs.student.main;
 
 
@@ -84,4 +85,7 @@ public class KDTreeBuilderTest {
   }
 
 
+=======
+package edu.brown.cs.student.main;public class KDTreeBuilderTest {
+>>>>>>> 3f22abce643a56a4b5392d3a4eb463d1c693171a
 }

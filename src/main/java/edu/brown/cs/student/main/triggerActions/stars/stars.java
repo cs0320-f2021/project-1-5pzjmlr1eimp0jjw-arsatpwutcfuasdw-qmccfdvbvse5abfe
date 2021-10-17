@@ -36,8 +36,8 @@ public class stars implements TriggerAction {
 
     _storedStar = strArr;
     ans = String.format("Read %d stars from %s", _storedStar.size(), args[0]);
-
-    return ans;
+    System.out.println(ans);
+    return null;
   }
 
   @Override

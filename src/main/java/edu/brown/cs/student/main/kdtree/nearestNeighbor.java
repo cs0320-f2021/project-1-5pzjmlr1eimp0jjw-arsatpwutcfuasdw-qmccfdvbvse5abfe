@@ -38,42 +38,36 @@ public class nearestNeighbor {
       }
     }
 
-    if (neighbors.size() > 0) {
-      //calculate the dimension we're on
-      int dim = kdtree.depth % target.size();
+    //calculate the dimension we're on
+    int dim = kdtree.depth % target.size();
 
-      //finding the farthest neighbor
-      List<Number> farthestNeighbor = neighbors.get(0);
+    //finding the farthest neighbor
+    List<Number> farthestNeighbor = neighbors.get(0);
 
-      //calculates distance for each neighbor and updates farthestNeighbor accordingly
-      for (List<Number> neigh : neighbors) {
-        if (this.euclidDistance(neigh, target) < this.euclidDistance(farthestNeighbor, target)) {
-          farthestNeighbor = neigh;
-        }
+    //calculates distance for each neighbor and updates farthestNeighbor accordingly
+    for (List<Number> neigh : neighbors) {
+      if (this.euclidDistance(neigh, target) < this.euclidDistance(farthestNeighbor, target)) {
+        farthestNeighbor = neigh;
       }
+    }
 
-      //calculating the axis distance
-      double targetDimValue = target.get(dim).doubleValue();
-      double nodeDimValue = kdtree.value.get(dim).doubleValue();
-      double axisDistance = Math.abs(targetDimValue - nodeDimValue);
+    //calculating the axis distance
+    double targetDimValue = target.get(dim).doubleValue();
+    double nodeDimValue = kdtree.value.get(dim).doubleValue();
+    double axisDistance = Math.abs(targetDimValue - nodeDimValue);
 
-
-      //if the euclid distance between target & farthest point is greater than axis, recur on both branches
-      if (this.euclidDistance(farthestNeighbor, target) > axisDistance && kdtree.leftBranch != null) {
-        List<List<Number>> leftNeighbors = findNeighbors(kdtree.leftBranch, k, target, neighbors);
-        findNeighbors(kdtree.rightBranch, k, target, leftNeighbors);
+    //if the euclid distance between target & farthest point is greater than axis, recur on both branches
+    if (this.euclidDistance(farthestNeighbor, target) > axisDistance) {
+      List<List<Number>> leftNeighbors = findNeighbors(kdtree.leftBranch, k, target, neighbors);
+      findNeighbors(kdtree.rightBranch, k, target, leftNeighbors);
+    } else {
+      //if node value < target value, recur on right branch
+      if (nodeDimValue < targetDimValue) {
+        findNeighbors(kdtree.rightBranch, k, target, neighbors);
       }
+      //if node value > target value, recur on left branch
       else {
-        //if node value < target value, recur on right branch
-        if (nodeDimValue < targetDimValue && kdtree.rightBranch != null) {
-          findNeighbors(kdtree.rightBranch, k, target, neighbors);
-        }
-        //if node value > target value, recur on left branch
-        else {
-          if (kdtree.leftBranch != null) {
-            findNeighbors(kdtree.leftBranch, k, target, neighbors);
-          }
-        }
+        findNeighbors(kdtree.leftBranch, k, target, neighbors);
       }
     }
     //return list of neighbors

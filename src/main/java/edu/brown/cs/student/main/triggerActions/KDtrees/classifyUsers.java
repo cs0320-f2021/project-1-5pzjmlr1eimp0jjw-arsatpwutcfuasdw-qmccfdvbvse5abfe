@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static edu.brown.cs.student.main.triggerActions.stars.users.get_storedUsers;
+import static edu.brown.cs.student.main.triggerActions.stars.APICALLS.get_storedUsers;
 
 public class classifyUsers implements TriggerAction {
   int _fromID;
@@ -26,7 +26,7 @@ public class classifyUsers implements TriggerAction {
   @Override
   public String execute(String[] args) {
     List<User> userList = get_storedUsers();
-    User dummyUser = new User(0, 0, "",0 ,0 , "", "");
+    User dummyUser = new User("0", "0", "","0" ,"0" , "", "");
     /*TODO: insert methods that will output a user list
      */
     if (Integer.parseInt(args[0]) == 0) {  //find zero neighbors -> terminate
@@ -47,10 +47,10 @@ public class classifyUsers implements TriggerAction {
       Number age = 0;
       int i = 0;
       while (i < userList.size()) {
-        if (userList.get(i).user_id == Integer.parseInt(args[2])) {
-          weight = userList.get(i).weight;
-          height = userList.get(i).height;
-          age = userList.get(i).age;
+        if (Integer.parseInt(userList.get(i).user_id) == Integer.parseInt(args[2])) {
+          weight = Double.parseDouble(userList.get(i).weight.replaceAll("[^0-9]", ""));
+          height = Double.parseDouble(userList.get(i).height.replaceAll("[^0-9]", ""));
+          age = Double.parseDouble(userList.get(i).age.replaceAll("[^0-9]", ""));
         }
       }
       HashMap<String, Integer> classifyList = dummyUser.classify(userList, Integer.parseInt(args[1]),

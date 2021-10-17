@@ -55,7 +55,7 @@ public class KDTreeBuilder {
    *
    * @param comparator - used to compare nodes
    * @param nodeSet - the set of nodes to convert into a KD tree
-   * @param depth - how far down in the tree we are
+   * @param depth - how far down in the tree we aare
    * @return
    */
     public Node buildTree(NodeComparator<Node> comparator, List<Node> nodeSet, int depth) {
@@ -88,7 +88,7 @@ public class KDTreeBuilder {
       parentNode.leftBranch = leftNode;
 
       if (rightNodes.isEmpty()) { rightNode = null; }
-      else { rightNode = this.buildTree(comparator, rightNodes, depth+1); }
+      else { rightNode = this.buildTree(comparator, leftNodes, depth+1); }
       parentNode.rightBranch = rightNode;
       return parentNode;
     }
