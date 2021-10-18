@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package edu.brown.cs.student.main;
 
 
@@ -38,7 +37,7 @@ public class KDTreeBuilderTest {
     dataset1.add(set2);
     dataset1.add(set3);
 
-    NodeComparator<Node> comparator= new NodeComparator<Node>();
+    NodeComparator<Node> comparator = new NodeComparator<Node>();
     KDTreeBuilder kdTree1 = new KDTreeBuilder(dataset1, comparator, 3);
     List<Node> nodeSet1 = kdTree1.convertData();
     Node medianNode1 = kdTree1.getMedian(nodeSet1);
@@ -50,10 +49,10 @@ public class KDTreeBuilderTest {
     assertEquals(builtKDTree.getRightBranch().getValue(), set3);
     //testing findNeighbors function
     nearestNeighbor n = new nearestNeighbor();
-    List<List<Number>> dummyList= new ArrayList();
+    List<List<Number>> dummyList = new ArrayList();
     assertEquals(n.findNeighbors(builtKDTree, 0, set1, dummyList), dummyList);
 
-    List<List<Number>> dummyList1= new ArrayList();
+    List<List<Number>> dummyList1 = new ArrayList();
     dummyList1.add(set1);
     assertEquals(n.findNeighbors(builtKDTree, 1, set1, dummyList), dummyList1);
 
@@ -69,23 +68,20 @@ public class KDTreeBuilderTest {
     searchSet2.add(1);
     searchSet2.add(0);
 
-    List<List<Number>> dummyList2= new ArrayList();
+    List<List<Number>> dummyList2 = new ArrayList();
     dummyList2.add(set2);
     assertEquals(n.findNeighbors(builtKDTree, 1, searchSet2, dummyList), dummyList2);
 
     //test when k > number of elements
-    List<List<Number>> dummyList3= new ArrayList();
+    List<List<Number>> dummyList3 = new ArrayList();
     dummyList3.add(set2);
     dummyList3.add(set1);
     dummyList3.add(set3);
-    List<List<Number>> dummyList4= new ArrayList();
-    List<List<Number>> dummyList5= new ArrayList();
+    List<List<Number>> dummyList4 = new ArrayList();
+    List<List<Number>> dummyList5 = new ArrayList();
     assertEquals(n.findNeighbors(builtKDTree, 3, set1, dummyList4), dummyList3);
     assertEquals(n.findNeighbors(builtKDTree, 5, set1, dummyList5), dummyList3);
   }
 
 
-=======
-package edu.brown.cs.student.main;public class KDTreeBuilderTest {
->>>>>>> 3f22abce643a56a4b5392d3a4eb463d1c693171a
 }
