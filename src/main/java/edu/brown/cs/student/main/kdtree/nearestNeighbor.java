@@ -75,10 +75,6 @@ public class nearestNeighbor {
           }
         }
       }
-      //for some reason the root node gets added twice in this scenario
-//      if (k >= neighbors.size()) {
-//        neighbors.remove(0);
-//      }
     }
     //return list of neighbors
     return neighbors;
