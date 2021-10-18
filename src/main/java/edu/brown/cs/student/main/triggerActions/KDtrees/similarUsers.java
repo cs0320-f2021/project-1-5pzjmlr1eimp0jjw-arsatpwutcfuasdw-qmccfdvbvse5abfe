@@ -33,8 +33,8 @@ public class similarUsers implements TriggerAction {
       return "zero users returned";
     }
     if (args.length == this.getNumPara()[0]) {
-      List<Integer> similarList = dummyUser.returnNeighbors(userList, Integer.parseInt(args[1]),
-          Double.parseDouble(args[2]), Double.parseDouble(args[3]), Double.parseDouble(args[4]));
+      List<Integer> similarList = dummyUser.returnNeighbors(userList, Integer.parseInt(args[0]),
+          Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
       for (int id : similarList) {
         System.out.println(id);
       }
@@ -52,7 +52,7 @@ public class similarUsers implements TriggerAction {
         }
         i++;
       }
-      List<Integer> similarList = dummyUser.returnNeighbors(userList, Integer.parseInt(args[1]), weight, height, age);
+      List<Integer> similarList = dummyUser.returnNeighbors(userList, Integer.parseInt(args[0]), weight, height, age);
 
       for (int id : similarList) {
         System.out.println(id);
