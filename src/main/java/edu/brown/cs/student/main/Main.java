@@ -20,6 +20,7 @@ import edu.brown.cs.student.main.repl.REPL;
 import edu.brown.cs.student.main.repl.TriggerAction;
 import edu.brown.cs.student.main.triggerActions.MathBotAdd;
 import edu.brown.cs.student.main.triggerActions.MathBotSub;
+import edu.brown.cs.student.main.triggerActions.KDtrees.similarUsers;
 import edu.brown.cs.student.main.triggerActions.stars.*;
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
@@ -40,13 +41,13 @@ public final class Main {
   // use port 4567 by default when running server
   private static final int DEFAULT_PORT = 4567;
 
-  public static final List<TriggerAction> tas =
-    Arrays.asList(new MathBotAdd(), new MathBotSub(), new stars(), new naiveNeighbors(), new APICALLS());
-//instantiate all the classes that implement the TriggerAction interface
+  public static final List<TriggerAction> tas = Arrays.asList(new MathBotAdd(), new MathBotSub(), new stars(),
+      new naiveNeighbors(), new APICALLS(), new similarUsers());
+  // instantiate all the classes that implement the TriggerAction interface
 
   /**
-   * The initial method called when execution begins.
-   *m
+   * The initial method called when execution begins. m
+   * 
    * @param args An array of command line arguments
    */
   public static void main(String[] args) {
@@ -67,16 +68,14 @@ public final class Main {
     parser.accepts("gui");
 
     // use "--port <n>" to specify what port on which the server runs
-    parser.accepts("port").withRequiredArg().ofType(Integer.class)
-        .defaultsTo(DEFAULT_PORT);
+    parser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(DEFAULT_PORT);
 
     OptionSet options = parser.parse(args);
     if (options.has("gui")) {
       runSparkServer((int) options.valueOf("port"));
     }
 
-    REPL.run(tas); //start up the REPL here
-
+    REPL.run(tas); // start up the REPL here
 
   }
 
@@ -88,8 +87,7 @@ public final class Main {
     try {
       config.setDirectoryForTemplateLoading(templates);
     } catch (IOException ioe) {
-      System.out.printf("ERROR: Unable use %s for template loading.%n",
-          templates);
+      System.out.printf("ERROR: Unable use %s for template loading.%n", templates);
       System.exit(1);
     }
     return new FreeMarkerEngine(config);
@@ -135,24 +133,16 @@ public final class Main {
   /**
    * A handler to serve the site's main page.
    *
-   * @return ModelAndView to render.
-   * (main.ftl).
+   * @return ModelAndView to render. (main.ftl).
    */
   private static class MainHandler implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request req, Response res) {
       // this is a map of variables that are used in the FreeMarker template
-      Map<String, Object> variables = ImmutableMap.of("title",
-          "Go go GUI");
+      Map<String, Object> variables = ImmutableMap.of("title", "Go go GUI");
 
       return new ModelAndView(variables, "main.ftl");
     }
   }
-
-
-
-
-
-
 
 }
