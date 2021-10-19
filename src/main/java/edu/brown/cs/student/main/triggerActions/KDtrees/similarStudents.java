@@ -63,7 +63,6 @@ public class similarStudents implements TriggerAction {
             }
             List<Integer> similarList = dummyUser.returnNeighbors(studentList, Integer.parseInt(args[0]),
                     alg, frontend, comment, team, testing, oop);
-
             for (int id : similarList) {
                 System.out.println(id);
             }
