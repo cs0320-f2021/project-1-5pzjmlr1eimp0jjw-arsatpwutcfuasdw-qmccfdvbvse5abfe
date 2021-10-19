@@ -10,15 +10,17 @@ import java.nio.file.Paths;
 import java.time.Duration;
 
 /**
- * This class encapsulates the client request handling logic. It is agnostic of what kinds of requests are being made.
- * The exact request formatting is outsourced to ClientRequestGenerator.
+ * This class encapsulates the client request handling logic. It is agnostic of
+ * what kinds of requests are being made. The exact request formatting is
+ * outsourced to ClientRequestGenerator.
  */
 public class ApiClient {
 
     private HttpClient client;
 
     public ApiClient() {
-        // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html
+        // See
+        // https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html
         HttpClient client = HttpClient.newHttpClient();
         this.client = client;
     }
@@ -28,8 +30,8 @@ public class ApiClient {
         try {
 
             HttpResponse<String> apiResponse = client.send(req, HttpResponse.BodyHandlers.ofString());
-//            System.out.println("Status " + apiResponse.statusCode());
-//            System.out.println(apiResponse.body());
+            // System.out.println("Status " + apiResponse.statusCode());
+            // System.out.println(apiResponse.body());
             return apiResponse;
 
         } catch (IOException ioe) {
@@ -41,8 +43,8 @@ public class ApiClient {
             System.out.println(ie.getMessage());
 
         } catch (IllegalArgumentException iae) {
-            System.out.println(
-                    "The request argument was invalid. It must be built as specified by HttpRequest.Builder.");
+            System.out
+                    .println("The request argument was invalid. It must be built as specified by HttpRequest.Builder.");
             System.out.println(iae.getMessage());
 
         } catch (SecurityException se) {

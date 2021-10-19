@@ -43,7 +43,7 @@ public final class Main {
   private static final int DEFAULT_PORT = 4567;
 
   public static final List<TriggerAction> tas = Arrays.asList(new MathBotAdd(), new MathBotSub(), new stars(),
-      new naiveNeighbors(), new APICALLS(), new similarUsers(), new similarStudents());
+          new naiveNeighbors(), new APICALLS(), new similarUsers(), new similarStudents(), new studentData());
   // instantiate all the classes that implement the TriggerAction interface
 
   /**
