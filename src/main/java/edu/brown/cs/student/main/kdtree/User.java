@@ -16,6 +16,7 @@ public class User {
   public String body_type;
   public String horoscope;
 
+
   public User() {
     super();
   }
