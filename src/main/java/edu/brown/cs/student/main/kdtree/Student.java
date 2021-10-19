@@ -82,12 +82,18 @@ public class Student {
         List<List<Number>> studentInfo = new ArrayList<>();
         for (Student person : studentList) {
             List<Number> studentData = new ArrayList<>();
-            Double we2 = Double.parseDouble(person.height.replaceAll("[^0-9]", ""));
-            Double age = Double.parseDouble(person.age.replaceAll("[^0-9]", ""));
-            Double we = Double.parseDouble(person.weight.replaceAll("[^0-9]", ""));
-            studentData.add(0, we);
-            studentData.add(1, we2);
-            studentData.add(2, age);
+            int alg = person.algorithm_skills;
+            int frontend = person.frontend_skills;
+            int comment = person.commenting_skills;
+            int team = person.teamwork_skills;
+            int testing = person.testing_skills;
+            int oop = person.OOP_skills;
+            studentData.add(0, alg);
+            studentData.add(1, frontend);
+            studentData.add(2, comment);
+            studentData.add(3, team);
+            studentData.add(4, testing);
+            studentData.add(5, oop);
             studentInfo.add(studentData);
         }
         NodeComparator comparator = new NodeComparator();
@@ -99,25 +105,31 @@ public class Student {
     /**
      * finds the nearest neighbors and returns list of points
      *
-     * @param userList     - the list of users we want to search through
+     * @param studentList     - the list of Students we want to search through
      * @param numNeighbors - number of neighbors we want to find
-     * @param weight       - target weight
-     * @param height       -- target height
-     * @param age          - target age
+     * @param alg       - target algorithm
+     * @param frontend       -- target frontend
+     * @param comment          - target commenting
+     * @param team       - target team
+     * @param testing       -- target testing
+     * @param oop          - target oop
      * @return - list of coordinates that are nearest
      */
-    public List<List<Number>> findUsers(Collection<User> userList, int numNeighbors, Number weight, Number height,
-                                        Number age) {
-        List<Number> targetUser = new ArrayList<>(3);
-        targetUser.add(0, weight);
-        targetUser.add(1, height);
-        targetUser.add(2, age);
-
-        Node userTree = kdTreeofUsers(userList);
+    public List<List<Number>> findStudents(Collection<Student> studentList, int numNeighbors,
+                                        Number alg, Number frontend, Number comment, Number team, Number testing,
+                                        Number oop) {
+        List<Number> targetStudent = new ArrayList<>(3);
+        targetStudent.add(0, alg);
+        targetStudent.add(1, frontend);
+        targetStudent.add(2, comment);
+        targetStudent.add(3, team);
+        targetStudent.add(4, testing);
+        targetStudent.add(5, oop);
+        Node studentTree = kdTreeofStudents(studentList);
         nearestNeighbor x = new nearestNeighbor();
         // initialize dummy list to pass into findNeighbors
         List<List<Number>> dummyList = new ArrayList<>();
-        return x.findNeighbors(userTree, numNeighbors, targetUser, dummyList);
+        return x.findNeighbors(studentTree, numNeighbors, targetStudent, dummyList);
 
     }
     /**
@@ -125,15 +137,36 @@ public class Student {
      *
      * @param studentList - list of student to search through
      * @param numNeighbors - number of neighbors to find
-     * @param weight       - target weight
-     * @param height       - target height
-     * @param age          - target age
+     * @param alg       - target algorithm skill
+     * @param frontend       - target frontend skill
+     * @param comment          - target comment skill
      * @return - list of integers representing closest student IDs
      */
-    public List<Integer> returnNeighbors(Collection<Student> studentList, int numNeighbors, Number weight, Number height,
-                                         Number age) {
-        List<List<Number>> closeStudents = findUsers(studentList, numNeighbors, weight, height, age);
-        return getUserID(closeStudents, studentList);
+    public List<Integer> returnNeighbors(Collection<Student> studentList, int numNeighbors,
+                                         Number alg, Number frontend, Number comment, Number team, Number testing,
+                                         Number oop) {
+        List<List<Number>> closeStudents = findStudents(studentList, numNeighbors, alg, frontend, comment,
+                team, testing, oop);
+        return getStudentID(closeStudents, studentList);
+    }
+    public List<Integer> getStudentID(List<List<Number>> neighbors, Collection<Student> studentsToSearch) {
+        List<Integer> idList = new ArrayList<>();
+        for (List<Number> elt : neighbors) {
+            for (Student person : studentsToSearch) {
+                int i = Integer.parseInt(person.id);
+                int alg = person.algorithm_skills;
+                int frontend = person.frontend_skills;
+                int comment = person.commenting_skills;
+                int team = person.teamwork_skills;
+                int testing = person.testing_skills;
+                int oop = person.OOP_skills;
+                if ((elt.get(0).equals(alg)) && (elt.get(1).equals(frontend)) && (elt.get(2).equals(comment))
+                        && (elt.get(3).equals(team)) && (elt.get(4).equals(testing)) && (elt.get(5).equals(oop))) {
+                    idList.add(i);
+                }
+            }
+        }
+        return idList;
     }
 
 }

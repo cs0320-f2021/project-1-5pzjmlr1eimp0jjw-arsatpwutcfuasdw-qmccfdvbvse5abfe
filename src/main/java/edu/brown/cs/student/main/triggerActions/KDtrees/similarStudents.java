@@ -4,6 +4,7 @@ import edu.brown.cs.student.main.kdtree.Student;
 import edu.brown.cs.student.main.kdtree.User;
 import edu.brown.cs.student.main.repl.TriggerAction;
 
+import java.util.ArrayList;
 import java.util.List;
 //TODO: modify this to take on STUDENTS
 
@@ -25,7 +26,7 @@ public class similarStudents implements TriggerAction {
 
     @Override
     public String execute(String[] args) {
-        List<Student> StudentList = get_storedUsers(); // replace with way to get Students
+        List<Student> studentList = new ArrayList<Student>(); // replace with way to get Students
         Student dummyUser = new Student("0", "", "", "", "", "", "", "", "", "", 0, 0, 0, 0, 0, 0);
         /*
          * TODO: insert methods that will output a user list
@@ -34,26 +35,34 @@ public class similarStudents implements TriggerAction {
             return "zero Students returned";
         }
         if (args.length == this.getNumPara()[0]) {
-            List<Integer> similarList = dummyUser.returnNeighbors(userList, Integer.parseInt(args[0]),
-                    Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
+            List<Integer> similarList = dummyUser.returnNeighbors(studentList, Integer.parseInt(args[0]),
+                    Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]),
+                    Double.parseDouble(args[4]), Double.parseDouble(args[5]), Double.parseDouble(args[6]));
             for (int id : similarList) {
                 System.out.println(id);
             }
         } else if (args.length == this.getNumPara()[1]) {
             // extract user information from user list
-            Number weight = 0;
-            Number height = 0;
-            Number age = 0;
+            Number alg = 0;
+            Number frontend = 0;
+            Number comment = 0;
+            Number team = 0;
+            Number testing = 0;
+            Number oop = 0;
             int i = 0;
-            while (i < userList.size()) {
-                if (Integer.parseInt(userList.get(i).user_id) == Integer.parseInt(args[1])) {
-                    weight = Double.parseDouble(userList.get(i).weight.replaceAll("[^0-9]", ""));
-                    height = Double.parseDouble(userList.get(i).height.replaceAll("[^0-9]", ""));
-                    age = Double.parseDouble(userList.get(i).age.replaceAll("[^0-9]", ""));
+            while (i < studentList.size()) {
+                if (Integer.parseInt(studentList.get(i).id) == Integer.parseInt(args[1])) {
+                    alg = studentList.get(i).algorithm_skills;
+                    frontend = studentList.get(i).frontend_skills;
+                    comment = studentList.get(i).commenting_skills;
+                    team = studentList.get(i).teamwork_skills;
+                    testing = studentList.get(i).testing_skills;
+                    oop = studentList.get(i).OOP_skills;
                 }
                 i++;
             }
-            List<Integer> similarList = dummyUser.returnNeighbors(userList, Integer.parseInt(args[0]), weight, height, age);
+            List<Integer> similarList = dummyUser.returnNeighbors(studentList, Integer.parseInt(args[0]),
+                    alg, frontend, comment, team, testing, oop);
 
             for (int id : similarList) {
                 System.out.println(id);
