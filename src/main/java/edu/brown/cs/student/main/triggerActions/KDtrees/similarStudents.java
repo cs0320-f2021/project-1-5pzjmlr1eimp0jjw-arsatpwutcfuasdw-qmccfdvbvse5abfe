@@ -1,10 +1,14 @@
 package edu.brown.cs.student.main.triggerActions.KDtrees;
 
+import edu.brown.cs.student.main.bloomfilter.BloomFilter;
+import edu.brown.cs.student.main.bloomfilter.BloomFilterRecommender;
 import edu.brown.cs.student.main.kdtree.Student;
 import edu.brown.cs.student.main.kdtree.User;
 import edu.brown.cs.student.main.repl.TriggerAction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 //TODO: modify this to take on STUDENTS
 
@@ -63,6 +67,12 @@ public class similarStudents implements TriggerAction {
             }
             List<Integer> similarList = dummyUser.returnNeighbors(studentList, Integer.parseInt(args[0]),
                     alg, frontend, comment, team, testing, oop);
+
+//            get the bloomfilter recommender
+//            BloomFilter<Student> bloom = new BloomFilter<Student>(0.1, similarList.size());
+//            BloomFilterRecommender<Student> recommedations = new BloomFilterRecommender<Student>(bloom, 0.1);
+//            HashMap<String, Student> bloomList = recommedations.getItems();
+
             for (int id : similarList) {
                 System.out.println(id);
             }

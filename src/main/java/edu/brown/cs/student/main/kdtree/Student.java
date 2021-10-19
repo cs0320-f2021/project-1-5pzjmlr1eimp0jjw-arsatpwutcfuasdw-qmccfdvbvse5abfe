@@ -1,12 +1,14 @@
 package edu.brown.cs.student.main.kdtree;
 
+import edu.brown.cs.student.main.bloomfilter.Item;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class Student {
+public class Student implements Item {
     //api data
     public String id;
     public String name;
@@ -169,4 +171,13 @@ public class Student {
         return idList;
     }
 
+    @Override
+    public List<String> getVectorRepresentation() {
+        return null;
+    }
+
+    @Override
+    public String getId() {
+        return this.id;
+    }
 }
