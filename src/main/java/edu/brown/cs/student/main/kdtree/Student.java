@@ -189,8 +189,8 @@ public class Student implements Comparable<Student> {
     }
 
     public void setInterest(List<interests> interest) {
-        for (int i = 0; i < interest.length; i++) {
-            this.interests[i] = interest[i];
+        for (int i = 0; i < interest.size(); i++) {
+            // this.interests[i] = interest.get(i);
         }
     }
 }

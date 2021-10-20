@@ -25,12 +25,12 @@ public class studentData implements TriggerAction {
 
     @Override
     public String execute(String[] args) {
-        Student[] res2;
+        ArrayList<Student> res;
         System.out.println("Start Loading Student Data via API call");
         API api = new API(null, null);
         HashMap<String, String> hm = new HashMap<>();
         try {
-            ArrayList<Student> res = api.getSecuredAPI();
+            res = api.getSecuredAPI();
             Collections.sort(res);
             System.out.println(res.size() + " students created!");
         } catch (IOException | InterruptedException e) {
@@ -45,7 +45,7 @@ public class studentData implements TriggerAction {
                 for (int i = 1; i < 61; i++) {
                     hm.put("id", String.valueOf(i));
                     List<interests> out = db.select(interests.class, hm);
-                    res.id = System.out.println(out.get(0));
+                    res.get(i).setInterest(out);
                 }
             } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException | NoSuchMethodException | SecurityException e) {
