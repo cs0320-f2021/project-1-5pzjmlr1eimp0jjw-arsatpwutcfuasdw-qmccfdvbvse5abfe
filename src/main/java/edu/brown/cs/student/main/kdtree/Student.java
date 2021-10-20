@@ -6,8 +6,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class Student {
-    //api data
+import edu.tables.interests;
+
+public class Student implements Comparable<Student> {
+    // api data
     public String id;
     public String name;
     public String meeting;
@@ -18,7 +20,11 @@ public class Student {
     public String preferred_language;
     public String marginalized_groups;
     public String prefer_group;
-    //orm data
+
+    // orm data
+    public String[] interests;
+    public String negative;
+    public String positive;
     public int commenting_skills;
     public int testing_skills;
     public int OOP_skills;
@@ -29,9 +35,10 @@ public class Student {
     public Student() {
         super();
     }
+
     public Student(String id, String name, String meeting, String grade, String years, String horoscope, String time,
-                   String language, String marginalized_groups, String preferences, int commenting, int testing,
-                   int OOP, int algorithm, int teamwork, int frontend) {
+            String language, String marginalized_groups, String preferences, int commenting, int testing, int OOP,
+            int algorithm, int teamwork, int frontend) {
         this.id = id;
         this.name = name;
         this.meeting = meeting;
@@ -42,6 +49,9 @@ public class Student {
         this.preferred_language = language;
         this.marginalized_groups = marginalized_groups;
         this.prefer_group = preferences;
+        this.positive = null;
+        this.negative = null;
+        this.interests = null;
         this.commenting_skills = commenting;
         this.testing_skills = testing;
         this.OOP_skills = OOP;
@@ -105,19 +115,18 @@ public class Student {
     /**
      * finds the nearest neighbors and returns list of points
      *
-     * @param studentList     - the list of Students we want to search through
+     * @param studentList  - the list of Students we want to search through
      * @param numNeighbors - number of neighbors we want to find
-     * @param alg       - target algorithm
-     * @param frontend       -- target frontend
-     * @param comment          - target commenting
-     * @param team       - target team
-     * @param testing       -- target testing
+     * @param alg          - target algorithm
+     * @param frontend     -- target frontend
+     * @param comment      - target commenting
+     * @param team         - target team
+     * @param testing      -- target testing
      * @param oop          - target oop
      * @return - list of coordinates that are nearest
      */
-    public List<List<Number>> findStudents(Collection<Student> studentList, int numNeighbors,
-                                        Number alg, Number frontend, Number comment, Number team, Number testing,
-                                        Number oop) {
+    public List<List<Number>> findStudents(Collection<Student> studentList, int numNeighbors, Number alg,
+            Number frontend, Number comment, Number team, Number testing, Number oop) {
         List<Number> targetStudent = new ArrayList<>(3);
         targetStudent.add(0, alg);
         targetStudent.add(1, frontend);
@@ -132,23 +141,24 @@ public class Student {
         return x.findNeighbors(studentTree, numNeighbors, targetStudent, dummyList);
 
     }
+
     /**
      * given the datapoints of a target student, returns a list of closest students
      *
-     * @param studentList - list of student to search through
+     * @param studentList  - list of student to search through
      * @param numNeighbors - number of neighbors to find
-     * @param alg       - target algorithm skill
-     * @param frontend       - target frontend skill
-     * @param comment          - target comment skill
+     * @param alg          - target algorithm skill
+     * @param frontend     - target frontend skill
+     * @param comment      - target comment skill
      * @return - list of integers representing closest student IDs
      */
-    public List<Integer> returnNeighbors(Collection<Student> studentList, int numNeighbors,
-                                         Number alg, Number frontend, Number comment, Number team, Number testing,
-                                         Number oop) {
-        List<List<Number>> closeStudents = findStudents(studentList, numNeighbors, alg, frontend, comment,
-                team, testing, oop);
+    public List<Integer> returnNeighbors(Collection<Student> studentList, int numNeighbors, Number alg, Number frontend,
+            Number comment, Number team, Number testing, Number oop) {
+        List<List<Number>> closeStudents = findStudents(studentList, numNeighbors, alg, frontend, comment, team,
+                testing, oop);
         return getStudentID(closeStudents, studentList);
     }
+
     public List<Integer> getStudentID(List<List<Number>> neighbors, Collection<Student> studentsToSearch) {
         List<Integer> idList = new ArrayList<>();
         for (List<Number> elt : neighbors) {
@@ -169,4 +179,18 @@ public class Student {
         return idList;
     }
 
+    @Override
+    public int compareTo(Student arg0) {
+        if (Integer.parseInt(this.id) > Integer.parseInt(arg0.id)) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public void setInterest(List<interests> interest) {
+        for (int i = 0; i < interest.length; i++) {
+            this.interests[i] = interest[i];
+        }
+    }
 }

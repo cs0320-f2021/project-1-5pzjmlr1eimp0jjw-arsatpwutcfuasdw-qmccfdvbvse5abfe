@@ -186,6 +186,8 @@ public class Database {
      * @param c           the class of the object that we are returning.
      * @param queryParams the criteria for selection.
      * @return a list of objects as retrieved from the database.
+     * 
+     *         <"id", "1">, <"interest", "Politics">
      * @throws SQLException
      * @throws InstantiationException
      * @throws IllegalAccessException
@@ -214,6 +216,7 @@ public class Database {
 
         String sql = "SELECT * FROM " + tableName + " WHERE " + wheres + ";";
         System.out.println(sql);
+        System.out.println(params);
         return sqlListQuery(c, sql, params);
     }
 

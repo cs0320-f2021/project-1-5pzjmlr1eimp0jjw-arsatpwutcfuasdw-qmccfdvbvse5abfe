@@ -118,7 +118,7 @@ public class API {
      * On successful execution, this method will return an array of Student class
      * loaded from the API
      */
-    public Student[] getSecuredAPI() throws IOException, InterruptedException {
+    public ArrayList<Student> getSecuredAPI() throws IOException, InterruptedException {
 
         String url = "https://runwayapi.herokuapp.com/integration";
 
@@ -137,7 +137,8 @@ public class API {
             line = response.body();
             ObjectMapper mapper = new ObjectMapper();
             Student[] myObjects = mapper.readValue(line, Student[].class);
-            return myObjects;
+            ArrayList<Student> ans = new ArrayList<>(Arrays.asList(myObjects));
+            return ans;
         } else {
             String temp = "Unknow error has occured";
             System.out.println(temp);
