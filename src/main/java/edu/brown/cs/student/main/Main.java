@@ -18,6 +18,7 @@ import com.google.common.collect.ImmutableMap;
 
 import edu.brown.cs.student.main.repl.REPL;
 import edu.brown.cs.student.main.repl.TriggerAction;
+import edu.brown.cs.student.main.triggerActions.KDtrees.similarStudents;
 import edu.brown.cs.student.main.triggerActions.MathBotAdd;
 import edu.brown.cs.student.main.triggerActions.MathBotSub;
 import edu.brown.cs.student.main.triggerActions.KDtrees.similarUsers;
@@ -42,7 +43,7 @@ public final class Main {
   private static final int DEFAULT_PORT = 4567;
 
   public static final List<TriggerAction> tas = Arrays.asList(new MathBotAdd(), new MathBotSub(), new stars(),
-      new naiveNeighbors(), new APICALLS(), new similarUsers(), new studentData());
+          new naiveNeighbors(), new APICALLS(), new similarUsers(), new similarStudents(), new studentData());
   // instantiate all the classes that implement the TriggerAction interface
 
   /**

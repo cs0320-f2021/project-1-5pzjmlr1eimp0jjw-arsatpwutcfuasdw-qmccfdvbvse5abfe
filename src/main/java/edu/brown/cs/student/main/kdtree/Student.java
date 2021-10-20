@@ -1,5 +1,7 @@
 package edu.brown.cs.student.main.kdtree;
 
+import edu.brown.cs.student.main.bloomfilter.Item;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,8 +10,11 @@ import java.util.List;
 
 import edu.tables.interests;
 
-public class Student implements Comparable<Student> {
+// api data
+
+public class Student implements Item, Comparable<Student> {
     // api data
+
     public String id;
     public String name;
     public String meeting;
@@ -180,6 +185,7 @@ public class Student implements Comparable<Student> {
     }
 
     @Override
+
     public int compareTo(Student arg0) {
         if (Integer.parseInt(this.id) > Integer.parseInt(arg0.id)) {
             return 0;
@@ -192,5 +198,18 @@ public class Student implements Comparable<Student> {
         for (int i = 0; i < interest.size(); i++) {
             // this.interests[i] = interest.get(i);
         }
+
+    }
+
+    @Override
+    public List<String> getVectorRepresentation() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getId() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

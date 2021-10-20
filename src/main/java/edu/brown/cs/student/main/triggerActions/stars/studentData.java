@@ -45,7 +45,7 @@ public class studentData implements TriggerAction {
                 for (int i = 1; i < 61; i++) {
                     hm.put("id", String.valueOf(i));
                     List<interests> out = db.select(interests.class, hm);
-                    res.get(i).setInterest(out);
+                    // res.get(i).setInterest(out);
                 }
             } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException | NoSuchMethodException | SecurityException e) {
